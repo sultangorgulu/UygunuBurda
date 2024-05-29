@@ -1,0 +1,78 @@
+name: uygunuburda
+description: "Uygunuburda mobil uygulaması"
+
+# Yayınlama ayarları
+publish_to: 'none' # Paketin pub.dev'e yanlışlıkla yayınlanmasını önler
+
+# Sürüm ve yapı numarası
+version: 1.0.0+1
+
+flutter: 
+ assets:
+  - assets/logos/
+  - assets/images/on_boarding_images/
+  - assets/images/banners/
+  - assets/images/products/
+
+ uses-material-design: true
+
+
+
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+# Bağımlılıklar
+dependencies:
+  flutter:
+    sdk: flutter
+  
+ 
+
+  # HTTP istekleri için
+  http: ^1.1.0
+  
+  # Uluslararasılaştırma için
+  intl: ^0.18.1
+  
+  # Günlük kaydı için
+  logger: ^2.0.1
+  
+  # URL açma için
+  url_launcher: ^6.1.12
+  
+  # Durum yönetimi için
+  get: ^4.6.6 
+  get_storage: ^2.1.1
+
+  #product spesific
+  readmore: ^2.2.0
+  
+  # Açılış ekranı için
+  flutter_native_splash: ^2.3.10
+  
+  # Sayfa göstergesi için
+  smooth_page_indicator: ^1.1.0
+  
+  # Firebase kütüphaneleri
+  firebase_core: ^2.31.1
+  iconsax: ^0.0.8
+  firebase_auth: ^4.3.1
+  firebase_storage: ^11.6.10
+  carousel_slider: ^4.2.1
+  flutter_carousel_widget: ^2.2.0
+  flutter_custom_carousel: ^0.1.0+1
+  firebase_performance: ^0.9.3+18
+  
+  # Durum yönetimi için
+  provider: ^6.1.2
+  
+  # iOS ikonları için
+  cupertino_icons: ^1.0.2
+
+# Geliştirme bağımlılıkları
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0 # Kodlama standartlarını kontrol eder
+

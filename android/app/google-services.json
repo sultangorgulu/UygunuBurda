@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "439771829260",
+    "project_id": "uygunuburda-81794",
+    "storage_bucket": "uygunuburda-81794.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439771829260:android:7409b800a8c42ab181ca29",
+        "android_client_info": {
+          "package_name": "com.example.uygunuburda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439771829260-gln5n2di35qr27us8fl6mjevs5l1n6pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnc-rTq5t0QUYyRD38-DgBTCxLwN9R-tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439771829260-gln5n2di35qr27us8fl6mjevs5l1n6pm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "439771829260-51kaj10ik70oal5g891fnqno9o66eurp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.uygunuburda"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
