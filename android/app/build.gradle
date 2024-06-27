@@ -2,7 +2,8 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id("com.google.gms.google-services") version "4.4.0" // Sürüm numarasını belirtin
+    // Plugin sürümünü kaldırın
+    id "com.google.gms.google-services"
 }
 
 def localProperties = new Properties()
@@ -61,4 +62,11 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    // Firebase Performance Monitoring eklentisini ekleyin
+    implementation 'com.google.firebase:firebase-perf:20.0.4'
+}
+
+// Firebase Performance Monitoring eklentisini ekleyin
+apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.gms.google-services'

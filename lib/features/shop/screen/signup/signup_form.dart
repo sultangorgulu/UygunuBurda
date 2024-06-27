@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/features/authentication/screen/signup/widgets/terms_conditions_checkbox.dart';
-import 'package:uygunuburda/features/authentication/screen/signup/widgets/verify_email.dart';
+import 'package:uygunuburda/features/authentication/screen/verify_email/verify_email.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/constants/text_strings.dart';
 

@@ -314,13 +314,13 @@
 			files = (
 			);
 			inputFileListPaths = (
-				Flutter/ephemeral/FlutterInputs.xcfilelist,
+				Flutter/ephemeral/FlutterInputs.x AppFilelist,
 			);
 			inputPaths = (
 				Flutter/ephemeral/tripwire,
 			);
 			outputFileListPaths = (
-				Flutter/ephemeral/FlutterOutputs.xcfilelist,
+				Flutter/ephemeral/FlutterOutputs.x AppFilelist,
 			);
 			outputPaths = (
 			);

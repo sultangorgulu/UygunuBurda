@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/features/shop/screen/home/home.dart';
 import 'package:uygunuburda/features/shop/screen/store/store.dart';
 import 'package:uygunuburda/features/shop/screen/wishlist/wishlist.dart';
-import 'package:uygunuburda/features/shop/screens/profile/profile.dart';
+import 'package:uygunuburda/features/shop/screen/profile/profile.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
 

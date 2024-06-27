@@ -1,111 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:uygunuburda/common/styles/shadows.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:uygunuburda/common/widgets/icons/circular_icons.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
-import 'package:uygunuburda/common/widgets/texts/brand_title_text_with_verified_icon.dart';
-import 'package:uygunuburda/common/widgets/texts/product_price_text.dart';
 import 'package:uygunuburda/common/widgets/texts/product_title_text.dart';
+import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
+import 'package:uygunuburda/features/personalization/controllers/product_controller.dart';
+import 'package:uygunuburda/features/shop/screen/home/widgets/favorite_icon.dart';
 import 'package:uygunuburda/features/shop/screen/product_details/product_detail.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
-import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
+import 'package:uygunuburda/util/shared/box_shadow.dart';
+import 'package:uygunuburda/util/shared/verified_icon_text.dart';
 
-class AppProductCardVertical extends StatelessWidget {
-  const AppProductCardVertical({super.key});
+class AppProductItem extends StatelessWidget {
+  const AppProductItem({
+    super.key,
+    this.ontap,
+    required this.product,
+  });
 
- @override
-  Widget build (BuildContext context) {
+  final VoidCallback? ontap;
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
+    final productcontroller = ProductController.instance;
 
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetailScreen()) ,
+      onTap: ontap ?? () {
+        Get.to(() => ProductDetailScreen(product: product));
+      },
       child: Container(
         width: 180,
-        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          boxShadow:  [ AppShadowStyle.verticalProductShadow], 
+          boxShadow: [AppBoxShadow.verticalboxshadow],
           borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
-          color: dark ? AppColors.darkerGrey : AppColors.white,
+          color: dark ? AppColors.darkGrey : AppColors.white,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppRoundedContainer(
               height: 180,
+              width: 180,
               padding: const EdgeInsets.all(AppSizes.sm),
-              backgroundColor: dark ? AppColors.dark : AppColors.light,
+              backgroundcolor: dark ? AppColors.dark : AppColors.light,
               child: Stack(
                 children: [
-                 const AppRoundedImage(imageUrl: AppImages.productImage1, applyImageRadius: true),
-      
+                  AppRoundedImage(
+                    imageurl: product.thumbnail,
+                    roundedborder: true,
+                    isNetworkImage: true,
+                  ),
                   Positioned(
-                    top: 12,
+                    top: 10,
                     child: AppRoundedContainer(
-                    radius:AppSizes.sm,
-                    backgroundColor: AppColors.secondary.withOpacity(0.8),
-                    padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xs),
-                    child: Text('25%', style: Theme.of(context).textTheme.labelLarge!.apply(color: AppColors.black)),
+                      radius: AppSizes.sm,
+                      backgroundcolor: AppColors.secondary.withOpacity(0.8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.sm,
+                        vertical: AppSizes.xs,
+                      ),
+                      child: const SizedBox.shrink(), // İçerik eklenmemişse boş bir alan bırakın.
+                    ),
                   ),
-                  ),
-      
-                  const Positioned(
-                    top: 0,
+                  Positioned(
                     right: 0,
-                    child: AppCircularIcon(icon: Iconsax.heart, color: Colors.red),
+                    child: FavoriteIcon(productId: product.id),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: AppSizes.spaceBtwItems/2),
-      
-            const Padding(
-              padding: EdgeInsets.only(left: AppSizes.sm),
+            Padding(
+              padding: const EdgeInsets.only(left: AppSizes.xs),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    AppProductTitleText(title: 'deneme deneme', smallSize: true),
-                    SizedBox(height: AppSizes.spaceBtwItems/2),
-                    AppBrandTitleWithVerifiedIcon(title: 'title'),
-               
+                  AppProductTitleText(
+                    title: product.title,
+                    smallsize: true,
+                  ),
+                  const SizedBox(height: AppSizes.spaceBtwItems / 2),
+                  AppVerifiedIconWithText(text: product.brand!.name),
                 ],
-                
               ),
             ),
-               const Spacer(),
-                
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-                    const Padding(
-                    padding: EdgeInsets.only(left: AppSizes.sm),
-                    child: AppProductPriceText(price: '35'),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: AppSizes.xs),
+                    child: Text(
+                      product.price.toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .apply(decoration: TextDecoration.lineThrough),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.dark,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(AppSizes.cardRadiusMd),
-                          bottomRight: Radius.circular(AppSizes.productImageRadius),
-                        ),
-                      ),
-                      child: const SizedBox(
-                        width:AppSizes.iconLg * 1.2,
-                        height:AppSizes.iconLg * 1.2,
-                        child: Center(child: Icon(Iconsax.add, color: AppColors.white, ))),
-                    ),
-                  ],
                   ),
+                ),
+              ],
+            ),
           ],
         ),
-      
       ),
     );
-    
-
   }
 }
-

@@ -1,39 +1,71 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:uygunuburda/util/constants/image_strings.dart';
+import 'package:get/get.dart';
+import 'package:uygunuburda/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
+import 'package:uygunuburda/common/widgets/shimmer.dart';
+import 'package:uygunuburda/features/personalization/controllers/banner_controller.dart';
+import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 
 class AppPromoSlider extends StatelessWidget {
-  const AppPromoSlider({Key? key}) : super(key: key);
+  const AppPromoSlider({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200, // Yüksekliği ayarlayın
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          _buildPromoBanner(AppImages.promoBanner1),
-          _buildPromoBanner(AppImages.promoBanner2),
-          _buildPromoBanner(AppImages.promoBanner3),
-          // İhtiyaç duyulan kadar daha fazla promo banner ekleyebilirsiniz
-        ],
-      ),
-    );
-  }
+    final bannercontroller = Get.put(BannnerController());
 
-  Widget _buildPromoBanner(String imagePath) {
     return Padding(
-      padding: EdgeInsets.only(right: AppSizes.defaultSpace),
-      child: SizedBox(
-        width: 400, // Genişliği ayarlayın
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+      padding: const EdgeInsets.all(AppSizes.defaultSpace),
+      child: Obx(() {
+        if (bannercontroller.isloading.value) {
+          return const AppShimmerEffect(width: double.infinity, height: 190);
+        }
+
+        if (bannercontroller.allBanners.isEmpty) {
+          return const Center(child: Text('No Data Found'));
+        } else {
+          return Column(
+            children: [
+              CarouselSlider(
+                items: bannercontroller.allBanners
+                    .map((banner) => AppRoundedImage(
+                          imageurl: banner.imageurl,
+                          isNetworkImage: true,
+                          onPressed: () => Get.toNamed(banner.targetscreen),
+                        ))
+                    .toList(),
+                options: CarouselOptions(
+                  viewportFraction: 1,
+                  onPageChanged: (index, reason) =>
+                      bannercontroller.updatepageindex(index),
+                ),
+              ),
+              const SizedBox(height: AppSizes.spaceBtwItems),
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < bannercontroller.allBanners.length; i++)
+                      AppRoundedContainer(
+                        height: 4,
+                        width: 20,
+                        backgroundcolor:
+                            bannercontroller.currentpageIndex.value == i
+                                ? AppColors.primary
+                                : AppColors.grey,
+                        radius: 20,
+                        margin: const EdgeInsets.only(right: 10),
+                      ),
+                  ],
+                ),
+              )
+            ],
+          );
+        }
+      }),
     );
   }
 }

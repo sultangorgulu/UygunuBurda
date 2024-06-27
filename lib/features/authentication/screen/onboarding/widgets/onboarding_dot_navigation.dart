@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:uygunuburda/features/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:uygunuburda/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
 

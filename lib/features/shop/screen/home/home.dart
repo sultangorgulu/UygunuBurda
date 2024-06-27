@@ -1,75 +1,96 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/containers/location_bar.dart';
+import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:uygunuburda/common/widgets/layouts/grid_layout.dart';
-import 'package:uygunuburda/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:uygunuburda/common/widgets/texts/section_heading.dart';
+import 'package:uygunuburda/features/personalization/controllers/product_controller.dart';
 import 'package:uygunuburda/features/shop/screen/all_products/all_products.dart';
-import 'package:uygunuburda/features/shop/screen/home/widgets/home_appbar.dart';
 import 'package:uygunuburda/features/shop/screen/home/widgets/home_categories.dart';
+import 'package:uygunuburda/features/shop/screen/home/widgets/product_item.dart';
 import 'package:uygunuburda/features/shop/screen/home/widgets/promo_slider.dart';
+import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
+import 'package:uygunuburda/util/shared/gridview.dart';
+import 'package:uygunuburda/util/shared/search_bar.dart';
+import 'package:uygunuburda/util/shared/section_title.dart';
+import 'package:uygunuburda/util/shared/shimmers/vertical_shimmer_effect.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AppPrimaryHeaderContainer(
+            AppPrimaryHeaderContainer(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppHomeAppBar(),
+                  AppAppBar(),
                   SizedBox(height: AppSizes.spaceBtwSections),
-                  AppSearchContainer(text: 'Ürün Arayın'),
+                  AppSearchBar(
+                    text: 'Search in Store',
+                    showbackground: true,
+                    showborder: true,
+                  ),
                   SizedBox(height: AppSizes.spaceBtwSections),
                   Padding(
-                    padding: EdgeInsets.only(left: AppSizes.defaultSpace),
+                    padding: const EdgeInsets.only(left: AppSizes.defaultSpace),
                     child: Column(
                       children: [
-                        AppSectionHeading(
-                          title: 'Popüler Kategoriler',
-                          showActionButton: false,
-                          textColor: Colors.white,
+                        AppSectionTitle(
+                          title: 'Popular Categories',
+                          showactionbutton: false,
+                          textcolor: AppColors.white,
                         ),
                         SizedBox(height: AppSizes.spaceBtwItems),
                         AppHomeCategories(),
                       ],
                     ),
                   ),
-                  SizedBox(height: AppSizes.spaceBtwSections),
-                  Padding(
-                    padding: EdgeInsets.only(left: AppSizes.defaultSpace),
-                    child: LocationBar(),
-                  )
+                  SizedBox(height: AppSizes.spaceBtwItems / 0.3),
                 ],
+              ),
+            ),
+            AppPromoSlider(),
+            SizedBox(height: AppSizes.spaceBtwSections),
+            Padding(
+              padding: const EdgeInsets.only(left: AppSizes.defaultSpace),
+              child: AppSectionTitle(
+                title: 'Popular Products',
+                showactionbutton: true,
+                onPressed: () => Get.to(() => ViewAllProductsScreen(
+                      title: 'Popular Products',
+                      query: FirebaseFirestore.instance
+                          .collection('Products')
+                          .where('isFeatured', isEqualTo: true)
+                          .limit(6),
+                      futuremethod:
+                          productController.fetchAllFeaturedProducts(),
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(AppSizes.defaultSpace),
-              child: Column(
-                children: [
-                  const AppPromoSlider(),
-                  const SizedBox(height: AppSizes.spaceBtwSections),
-                  AppSectionHeading(
-                    title: 'Popüler Ürünler',
-                    onPressed: () => Get.to(() => const AllProducts()),
-                  ),
-                  const SizedBox(height: AppSizes.spaceBtwSections),
-                  AppGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => const AppProductCardVertical(),
-                  ),
-                ],
-              ),
-            ),
+              child: Obx(() {
+                if (productController.isloading.value) {
+                  return const AppVerticalShimmerEffect();
+                }
+
+                return AppGridView(
+                  itemcount: productController.allProducts.length,
+                  itembuilder: (context, index) {
+                    return AppProductItem(
+                      product: productController.allProducts[index],
+                    );
+                  },
+                );
+              }),
+            )
           ],
         ),
       ),

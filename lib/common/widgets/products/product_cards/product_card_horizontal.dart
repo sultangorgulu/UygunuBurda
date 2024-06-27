@@ -6,17 +6,22 @@ import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
 import 'package:uygunuburda/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:uygunuburda/common/widgets/texts/product_price_text.dart';
 import 'package:uygunuburda/common/widgets/texts/product_title_text.dart';
+import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
+import 'package:uygunuburda/features/personalization/controllers/product_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
 
 class AppProductCardHorizontal extends StatelessWidget {
-  const AppProductCardHorizontal ({super.key});
+  const AppProductCardHorizontal ({super.key, required this.product});
+
+  final Product product;
 
   @override 
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
+    final controller = ProductController.instance;
 
     return Container(
       width:310,
@@ -30,20 +35,20 @@ class AppProductCardHorizontal extends StatelessWidget {
           AppRoundedContainer(
             height: 120,
             padding: const EdgeInsets.all(AppSizes.sm),
-            backgroundColor: dark ? AppColors.dark : AppColors.light,
+            backgroundcolor: dark ? AppColors.dark : AppColors.light,
             child:  Stack(
               children:[
                 const SizedBox(
                   height: 120,
                   width: 120,
-                  child: AppRoundedImage(imageUrl: AppImages.productImage1, applyImageRadius: true,)
+                  child: AppRoundedImage(imageurl: AppImages.productImage1, applyImageRadius: true,)
                 ),
                 
                 Positioned(
                   top:12,
                   child: AppRoundedContainer(
                     radius: AppSizes.sm,
-                    backgroundColor: AppColors.secondary.withOpacity(0.8),
+                    backgroundcolor: AppColors.secondary.withOpacity(0.8),
                     padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xs),
                     child: Text('%25', style: Theme.of(context).textTheme.labelLarge!.apply(color: AppColors.black)),
                   ),
@@ -62,7 +67,7 @@ class AppProductCardHorizontal extends StatelessWidget {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppProductTitleText(title: 'ürün', smallSize: true),
+                            AppProductTitleText(title: 'ürün', smallsize: true),
                             SizedBox(height: AppSizes.spaceBtwItems / 2),
                             AppBrandTitleWithVerifiedIcon(title: 'marka'),
                           ],

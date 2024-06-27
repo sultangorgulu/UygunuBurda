@@ -18,7 +18,7 @@ class AppProductAttributes extends StatelessWidget {
       children: [
         AppRoundedContainer(
           padding: const EdgeInsets.all(AppSizes.md),
-          backgroundColor: dark ? AppColors.darkerGrey : AppColors.grey,
+          backgroundcolor: dark ? AppColors.darkerGrey : AppColors.grey,
           child: Column(
             children: [
               Row(
@@ -31,7 +31,7 @@ class AppProductAttributes extends StatelessWidget {
                 children: [
                     Row(
                   children: [
-                  const AppProductTitleText(title:'Fiyat:', smallSize: true),
+                  const AppProductTitleText(title:'Fiyat:', smallsize: true),
                   const SizedBox(width: AppSizes.spaceBtwItems),
 
                   Text(
@@ -48,7 +48,7 @@ class AppProductAttributes extends StatelessWidget {
             ],
             ),
 
-            const AppProductTitleText(title: 'açıklama', smallSize: true, maxLines: 4),
+            const AppProductTitleText(title: 'açıklama', smallsize: true, maxlines: 4),
 
 
             ]

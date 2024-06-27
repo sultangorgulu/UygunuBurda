@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:uygunuburda/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 
 class AppGridLayout extends StatelessWidget {
   const AppGridLayout({
-    super.key,
+    Key? key,
     required this.itemCount,
     required this.itemBuilder,
     this.mainAxisExtent = 288,
-  });
+  }) : super(key: key);
 
   final int itemCount;
   final double? mainAxisExtent;
-  final Widget? Function(BuildContext, int) itemBuilder;
+  final Widget Function(BuildContext, int) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: 4,
+      itemCount: itemCount,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
@@ -25,10 +24,13 @@ class AppGridLayout extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: AppSizes.gridViewSpacing,
         crossAxisSpacing: AppSizes.gridViewSpacing,
-        mainAxisExtent: mainAxisExtent,
-         ),
-         itemBuilder: (_,index)  => const AppProductCardVertical(),
-      );
+        mainAxisExtent: mainAxisExtent ?? 288,
+      ),
+      itemBuilder: (context, index) {
+        // itemBuilder ile her bir card için farklı ürün verisi geçiriyoruz
+        return itemBuilder(context, index);
+      },
+    );
   }
 }
 

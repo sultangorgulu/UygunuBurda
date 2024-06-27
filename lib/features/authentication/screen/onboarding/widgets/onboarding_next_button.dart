@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:uygunuburda/features/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:uygunuburda/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';

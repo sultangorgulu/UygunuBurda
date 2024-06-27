@@ -44,10 +44,10 @@ class AppProductImageSlider extends StatelessWidget {
                   separatorBuilder: (_,__) => const SizedBox(width: AppSizes.spaceBtwItems),
                   itemBuilder: (_, index) => AppRoundedImage(
                     width: 80,
-                    backgroundColor:  dark ? AppColors.dark : AppColors.white,
+                    backgroundcolor:  dark ? AppColors.dark : AppColors.white,
                     border: Border.all(color:AppColors.primary),
                     padding: const EdgeInsets.all(AppSizes.sm),
-                    imageUrl: AppImages.productImage1,
+                    imageurl: AppImages.productImage1,
                   ),
                 ),
               ),

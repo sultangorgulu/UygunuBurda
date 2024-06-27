@@ -1,37 +1,74 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:uygunuburda/common/widgets/shimmer.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 
 class AppRoundedImage extends StatelessWidget {
   const AppRoundedImage({
-    super.key, this.width, this.height, required this.imageUrl, this.applyImageRadius = true, this.border,  this.backgroundColor = AppColors.light, this.fit = BoxFit.contain, this.padding, this.isNetworkImage = false, this.onPressed, this.borderRadius = AppSizes.md,
+    super.key,
+    this.width,
+    this.applyImageRadius = true,
+    this.height,
+    required this.imageurl,
+    this.backgroundcolor = AppColors.light,
+    this.padding,
+    this.border,
+    this.boxFit = BoxFit.contain,
+    this.isNetworkImage = false,
+    this.onPressed,
+    this.roundedborder = false,
+    this.borderradius = AppSizes.md,
+    this.overlaycolor,
   });
 
-  final double? width, height;
-  final String imageUrl;
+  final double? height, width;
+  final String imageurl;
+  final bool roundedborder;
+  final BoxFit boxFit;
   final bool applyImageRadius;
-  final BoxBorder? border;
-  final Color backgroundColor;
-  final BoxFit? fit;
-  final EdgeInsetsGeometry? padding;
   final bool isNetworkImage;
   final VoidCallback? onPressed;
-  final double borderRadius;
+  final EdgeInsetsGeometry? padding;
+  final Color backgroundcolor;
+  final Color? overlaycolor;
+  final BoxBorder? border;
+  final double borderradius;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onPressed,
       child: Container(
         width: width,
         height: height,
         padding: padding,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppSizes.md)),
+        decoration: BoxDecoration(
+          border: border,
+          color: backgroundcolor,
+          borderRadius: BorderRadius.circular(borderradius),
+        ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppSizes.md),
-          child: Image(fit: fit, image:isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider,),
-          )
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: boxFit,
+                  imageUrl: imageurl,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      const AppShimmerEffect(width: 55, height: 55),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : imageurl != ''
+                  ? Image(
+                      image: AssetImage(imageurl),
+                      fit: boxFit,
+                      color: overlaycolor,
+                    )
+                  : null,
+          borderRadius: roundedborder
+              ? BorderRadius.circular(borderradius)
+              : BorderRadius.zero,
+        ),
       ),
     );
   }
 }
-

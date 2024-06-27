@@ -15,9 +15,9 @@ class AppBrandShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppRoundedContainer(
-      showBorder: true,
-      borderColor: AppColors.darkGrey,
-      backgroundColor: Colors.transparent,
+      showborder: true,
+      bordercolor: AppColors.darkGrey,
+      backgroundcolor: Colors.transparent,
       padding: const EdgeInsets.all(AppSizes.md),
       margin: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
       child: Column(
@@ -39,7 +39,7 @@ class AppBrandShowcase extends StatelessWidget {
           height: 100,
           padding: const EdgeInsets.all(AppSizes.md),
           margin: const EdgeInsets.only(right: AppSizes.sm),
-          backgroundColor: AppHelperFunctions.isDarkMode(context) ? AppColors.darkerGrey : AppColors.light,
+          backgroundcolor: AppHelperFunctions.isDarkMode(context) ? AppColors.darkerGrey : AppColors.light,
           child:Image(fit: BoxFit.contain, image: AssetImage(image)),
         )
         );

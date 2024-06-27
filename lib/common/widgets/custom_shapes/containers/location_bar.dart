@@ -15,17 +15,17 @@ class _LocationBarState extends State<LocationBar> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Iconsax.location, color: Colors.grey), // Konum simgesi (iconsax kullanıldı)
-        SizedBox(width: 8),
+        const Icon(Iconsax.location, color: Colors.grey), // Konum simgesi (iconsax kullanıldı)
+        const SizedBox(width: 8),
         Expanded(
           child: Text(
             _selectedLocation,
-            style: TextStyle(fontSize: 16, color: Colors.black), // Metin rengi siyah olarak değiştirildi
+            style: const TextStyle(fontSize: 16, color: Colors.black), // Metin rengi siyah olarak değiştirildi
             overflow: TextOverflow.ellipsis,
           ),
         ),
         IconButton(
-          icon: Icon(Iconsax.arrow_bottom, color: Colors.grey), // Aşağı ok simgesi (iconsax kullanıldı)
+          icon: const Icon(Iconsax.arrow_bottom, color: Colors.grey), // Aşağı ok simgesi (iconsax kullanıldı)
           onPressed: () {
             // Konum seçeneklerini göstermek için bir işlevsellik eklenebilir
           },

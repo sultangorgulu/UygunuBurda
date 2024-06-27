@@ -13,6 +13,10 @@ flutter:
   - assets/images/on_boarding_images/
   - assets/images/banners/
   - assets/images/products/
+  - assets/images/products_images/
+  - assets/images/animations/
+  
+
 
  uses-material-design: true
 
@@ -22,44 +26,35 @@ flutter:
 environment:
   sdk: '>=3.2.6 <4.0.0'
 
-# Bağımlılıklar
 dependencies:
+  cached_network_image: ^3.3.1
+  capped_progress_indicator: ^0.0.2
+  carousel_slider: ^4.2.1
+  cloud_firestore: ^4.15.4
+  connectivity_plus: ^5.0.2
+  cupertino_icons: ^1.0.2
+  firebase_analytics: ^10.8.5
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.6.5
   flutter:
     sdk: flutter
-  
- 
-
-  # HTTP istekleri için
+  flutter_native_splash: ^2.3.9
+  flutter_rating_bar: ^4.0.1
+  get: ^4.6.5
+  get_storage: ^2.1.1
+  google_sign_in: ^6.2.1
   http: ^1.1.0
-  
-  # Uluslararasılaştırma için
-  intl: ^0.18.1
-  
-  # Günlük kaydı için
+  iconsax: ^0.0.8
+  image_picker: ^1.0.7
+  intl: ^0.19.0
   logger: ^2.0.1
-  
-  # URL açma için
+  lottie: ^3.1.0
+  readmore: ^2.2.0
+  shimmer: ^3.0.0
+  smooth_page_indicator: ^1.1.0
   url_launcher: ^6.1.12
   
-  # Durum yönetimi için
-  get: ^4.6.6 
-  get_storage: ^2.1.1
-
-  #product spesific
-  readmore: ^2.2.0
-  
-  # Açılış ekranı için
-  flutter_native_splash: ^2.3.10
-  
-  # Sayfa göstergesi için
-  smooth_page_indicator: ^1.1.0
-  
-  # Firebase kütüphaneleri
-  firebase_core: ^2.31.1
-  iconsax: ^0.0.8
-  firebase_auth: ^4.3.1
-  firebase_storage: ^11.6.10
-  carousel_slider: ^4.2.1
   flutter_carousel_widget: ^2.2.0
   flutter_custom_carousel: ^0.1.0+1
   firebase_performance: ^0.9.3+18
@@ -67,8 +62,7 @@ dependencies:
   # Durum yönetimi için
   provider: ^6.1.2
   
-  # iOS ikonları için
-  cupertino_icons: ^1.0.2
+
 
 # Geliştirme bağımlılıkları
 dev_dependencies:
@@ -76,3 +70,4 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0 # Kodlama standartlarını kontrol eder
 
+ 

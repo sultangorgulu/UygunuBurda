@@ -1,62 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:uygunuburda/common/widgets/images/circular_image.dart';
-import 'package:uygunuburda/common/widgets/texts/brand_title_text_with_verified_icon.dart';
-import 'package:uygunuburda/common/widgets/texts/product_price_text.dart';
-import 'package:uygunuburda/common/widgets/texts/product_title_text.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
+import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
+import 'package:uygunuburda/features/personalization/controllers/product_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
-import 'package:uygunuburda/util/constants/enum.dart';
-import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
 
 class AppProductMetaData extends StatelessWidget {
   const AppProductMetaData({
     super.key,
+    required this.product,
   });
 
-  @override 
+  final Product product;
+
+  @override
   Widget build(BuildContext context) {
-    final darkMode = AppHelperFunctions.isDarkMode(context);
-    return Column(
-      children: [
-       Row(
-         children: [
-           AppRoundedContainer(
-            radius: AppSizes.sm,
-            backgroundColor: AppColors.secondary.withOpacity(0.8),
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xs),
-            child: Text('%25', style: Theme.of(context).textTheme.labelLarge!.apply(color: AppColors.black)),
-           ),
-          const SizedBox(width: AppSizes.spaceBtwItems),
-
-            Text('\$250', style: Theme.of(context).textTheme.titleSmall!.apply(decoration: TextDecoration.lineThrough)),
-            const SizedBox(width: AppSizes.spaceBtwItems),
-            const AppProductPriceText(price: '175', isLarge: true),
-
-         ],
-       ),
-            const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
-
-            const SizedBox(height: AppSizes.spaceBtwItems /1.5),
-            const AppProductTitleText(title: 'çikolata'),
-
-            Row(
-              children: [
-                AppCircularImage(
-                  image: AppImages.productImage1,
-                  width:32,
-                  height: 32,
-                  overlayColor: darkMode ? AppColors.white : AppColors.black,
-                  ),
-                  const AppBrandTitleWithVerifiedIcon(title: 'title', brandTextSize: TextSizes.medium)
-              ],
-            )
-
-
-
-      ]
-
+    final dark = AppHelperFunctions.isDarkMode(context);
+    final productController = ProductController.instance;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Iconsax.star5, color: Colors.amber, size: 24),
+                  const SizedBox(width: AppSizes.spaceBtwItems / 2),
+                  Text.rich(TextSpan(children: [
+                    TextSpan(
+                      text: '5.0',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const TextSpan(text: '(199)'),
+                  ]))
+                ],
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.share,
+                  size: AppSizes.md,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.spaceBtwItems),
+          Row(
+            children: [
+              AppRoundedImage(
+                imageurl: product.brand != null ? product.brand!.image : '',
+                height: 32,
+                width: 32,
+                backgroundcolor: dark ? AppColors.dark : AppColors.light,
+              ),
+              const SizedBox(width: AppSizes.spaceBtwItems),
+              Text(
+                product.brand != null ? product.brand!.name : '',
+                style: Theme.of(context).textTheme.titleLarge,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+              const SizedBox(width: AppSizes.xs),
+              const Icon(
+                Iconsax.verify5,
+                color: AppColors.primary,
+                size: AppSizes.iconXs,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

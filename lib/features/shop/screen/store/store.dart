@@ -1,124 +1,120 @@
 import 'package:flutter/material.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:uygunuburda/common/widgets/images/circular_image.dart';
-import 'package:uygunuburda/common/widgets/layouts/grid_layout.dart';
-import 'package:uygunuburda/common/widgets/products/cart_menu_icon.dart';
-import 'package:uygunuburda/common/widgets/texts/brand_title_text_with_verified_icon.dart';
-import 'package:uygunuburda/common/widgets/texts/section_heading.dart';
-import 'package:uygunuburda/features/shop/screen/home/widgets/category_tab.dart';
+import 'package:get/get.dart';
+import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
+import 'package:uygunuburda/common/widgets/appbar/tabbar.dart';
+import 'package:uygunuburda/features/authentication/models/controller/category_controller.dart';
+import 'package:uygunuburda/features/personalization/controllers/brand_controller.dart';
+import 'package:uygunuburda/features/shop/screen/brand/brand_products.dart';
+import 'package:uygunuburda/features/shop/screen/brands/brands.dart';
+import 'package:uygunuburda/features/shop/screen/store/widgets/category_tab.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
-import 'package:uygunuburda/util/constants/enum.dart';
-import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
+import 'package:uygunuburda/util/shared/shimmers/brand_shimmer.dart';
+import 'package:uygunuburda/util/shared/gridview.dart';
+import 'package:uygunuburda/util/shared/product_container.dart';
+import 'package:uygunuburda/util/shared/search_bar.dart';
+import 'package:uygunuburda/util/shared/section_title.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
 
-  @override 
+  @override
   Widget build(BuildContext context) {
+    final isdark = AppHelperFunctions.isDarkMode(context);
+    
+    final categories = CategoryController.instance.featuredCategories;
+    final brandcontroller = Get.put(BrandController());
     return DefaultTabController(
-      length: 6,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Store'),
-          actions:[
-            AppCartCounterIcon(onPressed: (){}, iconColor: AppColors.primary),
-          ],
-        ),
-        body: NestedScrollView(headerSliverBuilder: (_, innerBoxIsScrolled){
-          return [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              pinned: true,
-              floating: true,
-              backgroundColor: AppHelperFunctions.isDarkMode(context) ? AppColors.black: AppColors.white,
-              expandedHeight: 440, 
-      
-              flexibleSpace: Padding(
-                padding: const EdgeInsets.all(AppSizes.defaultSpace),
-                child:  ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children:  [
-                    const SizedBox(height: AppSizes.spaceBtwItems),
-                    const AppSearchContainer(text: 'Mağazalar arasında arayın', showBorder: true, showBackground: false, padding: EdgeInsets.zero),
-                    const SizedBox(height: AppSizes.spaceBtwSections),
-      
-                    AppSectionHeading(title: 'Featured Brands', onPressed: () {}),
-                    const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
-      
-                    AppGridLayout(itemCount: 4, itemBuilder: (_, index){
-                      return GestureDetector(
-                      onTap: (){},
-                      child: AppRoundedContainer(
-                        padding: const EdgeInsets.all(AppSizes.sm),
-                        showBorder: true,
-                        backgroundColor: Colors.transparent,
-                        child: Row(
-                          children: [
-                            AppCircularImage(
-                              image: AppImages.storeIcon,
-                              backgroundColor: Colors.transparent,
-                              isNetworkImage: false,
-                              overlayColor: AppHelperFunctions.isDarkMode(context) ? AppColors.white : AppColors.black,
-                              ),
-                              const SizedBox(width: AppSizes.spaceBtwItems / 2),
-                      
-                              Column(
-                                children: [
-                                  const AppBrandTitleWithVerifiedIcon(title: 'title', brandTextSize: TextSizes.large),
-                                  Text(
-                                    '256 ',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context).textTheme.labelMedium,
-                                  )
-                                ]
-                              )
-                          ]
-                          )
-                      ),
-                    );
-      
-                    }
-                    )
-      
-                  ]
-                ),
-              ),
-              
-          bottom: const TabBar(
-          tabs: [
-            Tab(child: Text('Sebze')),
-            Tab(child: Text('Sebze')),
-            Tab(child: Text('Sebze')),
-            Tab(child: Text('Sebze')),
-            Tab(child: Text('Sebze')),
-            Tab(child: Text('Sebze')),
-          ],  
+      length: categories.length,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppAppBar(
+            title: Text(
+              'Store',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
-            )
-          ];
-        }, 
+          body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  pinned: true,
+                  floating: true,
+                  backgroundColor: isdark ? AppColors.black : AppColors.white,
+                  expandedHeight: 440,
+                  flexibleSpace: Padding(
+                    padding: const EdgeInsets.all(AppSizes.defaultSpace),
+                    child: ListView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        const SizedBox(height: AppSizes.spaceBtwItems),
+                        const AppSearchBar(
+                          text: 'Search in Store',
+                          showbackground: false,
+                          showborder: true,
+                          padding: EdgeInsets.zero,
+                        ),
+                        const SizedBox(height: AppSizes.spaceBtwItems),
+                        AppSectionTitle(
+                          title: 'Featured Brands',
+                          showactionbutton: true,
+                          onPressed: () => Get.to(() => const BrandsScreen()),
+                        ),
+                        const SizedBox(height: AppSizes.spaceBtwItems / 2),
+                        Obx(() {
+                          if (brandcontroller.isloading.value) {
+                            return const AppBrandShimmer();
+                          }
 
-        body:const TabBarView(
-          children: [
-            AppCategoryTab(),
-            AppCategoryTab(),
-            AppCategoryTab(),
-            AppCategoryTab(),
-            
-          ]
-        )
-        )
-      )
-     );
+                          if (brandcontroller.featuredBrands.isEmpty) {
+                            return Center(
+                              child: Text(
+                                'No Data Found',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .apply(color: Colors.white),
+                              ),
+                            );
+                          }
+
+                          return AppGridView(
+                            itemcount: brandcontroller.featuredBrands.length,
+                            mainaxisextent: 80,
+                            itembuilder: (context, index) {
+                              final brand =
+                                  brandcontroller.featuredBrands[index];
+                              return AppProductContainer(
+                                showBorder: true,
+                                brand: brand,
+                                onPressed: () =>
+                                    Get.to(() => BrandProducts(brand: brand)),
+                              );
+                            },
+                          );
+                        }),
+                      ],
+                    ),
+                  ),
+                  bottom: AppTabBar(
+                      tabs: categories
+                          .map((category) => Tab(
+                                child: Text(category.name),
+                              ))
+                          .toList()),
+                ),
+              ];
+            },
+            body: TabBarView(
+                children: categories
+                    .map((category) => AppCategoryTab(category: category))
+                    .toList()),
+          ),
+        ),
+      ),
+    );
+  }
 }
-}
-
-
-
-
-
-//iconcolorda değişiklik lazım
