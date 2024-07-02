@@ -8,13 +8,13 @@ class ProductCategoryModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'productId': productId,
+      'ProductId': productId,
       'CategoryId': categoryId,
     };
   }
 
   ProductCategoryModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot)
-      : productId = snapshot.data()!['productId'] ?? '',
+      : productId = snapshot.data()!['ProductId'] ?? '',
         categoryId = snapshot.data()!['CategoryId'] ?? '';
 }

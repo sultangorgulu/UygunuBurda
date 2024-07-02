@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/features/authentication/models/controller/address_controller.dart';
 import 'package:uygunuburda/features/shop/screen/address/add_new_address.dart';
 import 'package:uygunuburda/features/shop/screen/address/widgets/address_container.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/helpers/cloud_helper_functions.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 
 class AddressView extends StatelessWidget {
   const AddressView({super.key});
@@ -25,7 +25,7 @@ class AddressView extends StatelessWidget {
           'Addresses',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        showBackArrow: true,
+        showbackarrow: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

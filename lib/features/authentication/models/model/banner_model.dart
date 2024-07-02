@@ -23,7 +23,7 @@ class BannerModel {
   }
 
   BannerModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
-      : imageurl = snapshot.data()!['Imageurl'] ?? '',
+      : imageurl = snapshot.data()!['ImageUrl'] ?? '',
         targetscreen = snapshot.data()!['Targetscreen'] ?? '',
         id = snapshot.id,
         active = snapshot.data()!['Active'] ?? false;

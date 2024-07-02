@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/database/banner_cloud.dart';
 import 'package:uygunuburda/database/brand_category_cloud.dart';
 import 'package:uygunuburda/database/brand_cloud.dart';
@@ -11,6 +10,7 @@ import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/shop/screen/profile/widgets/load_data_tile.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/section_title.dart';
 
 class LoadDataScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class LoadDataScreen extends StatelessWidget {
     return Scaffold(
       appBar: const AppAppBar(
         title: Text('Upload Data'),
-        showBackArrow: true,
+        showbackarrow: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),

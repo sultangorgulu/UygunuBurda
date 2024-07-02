@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:uygunuburda/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:uygunuburda/features/authentication/controllers/all_products_controller.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
-import 'package:uygunuburda/features/shop/screen/home/widgets/product_item.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/shared/gridview.dart';
 
@@ -27,8 +27,6 @@ class SortableProducts extends StatelessWidget {
             'Name',
             'Higher Price',
             'Lower Price',
-            'Sale',
-            'Newest',
             'Popularity'
           ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
           onChanged: (value) {
@@ -43,7 +41,7 @@ class SortableProducts extends StatelessWidget {
           () => AppGridView(
             itemcount: controller.products.length,
             itembuilder: (context, index) {
-              return AppProductItem(
+              return ProductCardVertical(
                 product: controller.products[index],
               );
             },

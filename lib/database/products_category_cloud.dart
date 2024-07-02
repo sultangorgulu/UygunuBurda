@@ -35,7 +35,7 @@ class ProductCategoryCloud extends GetxController {
     try {
       final snapshot = await db
           .collection('ProductCategory')
-          .where('productId', isEqualTo: productId)
+          .where('ProductId', isEqualTo: productId)
           .get();
 
       final list = snapshot.docs

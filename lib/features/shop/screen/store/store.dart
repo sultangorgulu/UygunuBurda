@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/appbar/tabbar.dart';
 import 'package:uygunuburda/features/authentication/models/controller/category_controller.dart';
 import 'package:uygunuburda/features/personalization/controllers/brand_controller.dart';
@@ -10,6 +9,7 @@ import 'package:uygunuburda/features/shop/screen/store/widgets/category_tab.dart
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/shimmers/brand_shimmer.dart';
 import 'package:uygunuburda/util/shared/gridview.dart';
 import 'package:uygunuburda/util/shared/product_container.dart';

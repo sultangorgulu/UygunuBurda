@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/features/authentication/models/controller/update_name_controller.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/constants/text_strings.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/validators/validation.dart';
 
 class ChangeNameScreen extends StatelessWidget {
@@ -16,7 +16,7 @@ class ChangeNameScreen extends StatelessWidget {
     return Scaffold(
       //custom Appbar
       appBar: AppAppBar(
-        showBackArrow: true,
+        showbackarrow: true,
         title: Text('Change Name',style: Theme.of(context).textTheme.headlineSmall,),
       ),
       body: Padding(

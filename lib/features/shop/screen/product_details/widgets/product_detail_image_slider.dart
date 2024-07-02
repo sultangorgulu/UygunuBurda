@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
+import 'package:uygunuburda/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
+
 import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
@@ -17,7 +18,7 @@ class AppProductImageSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         final dark = AppHelperFunctions.isDarkMode(context);
-    return AppCurvedEdgeWidget(
+    return AppCurvedEdges(
       child: Container(
         color: dark ? AppColors.darkerGrey : AppColors.light,
         child:  Stack(
@@ -61,4 +62,4 @@ class AppProductImageSlider extends StatelessWidget {
       )
     );
   }
-}
+}*/

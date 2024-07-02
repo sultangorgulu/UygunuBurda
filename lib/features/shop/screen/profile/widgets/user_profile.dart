@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
 import 'package:uygunuburda/common/widgets/shimmer.dart';
 import 'package:uygunuburda/features/authentication/models/controller/user_controller.dart';
@@ -9,6 +8,7 @@ import 'package:uygunuburda/features/shop/screen/profile/widgets/change_username
 import 'package:uygunuburda/features/shop/screen/profile/widgets/user_profile_tile.dart';
 import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/section_title.dart';
 
 class UserProfile extends StatelessWidget {
@@ -21,7 +21,7 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       appBar: const AppAppBar(
         title: Text('Profile'),
-        showBackArrow: true,
+        showbackarrow: true,
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -4,7 +4,7 @@ import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
 import 'package:uygunuburda/util/loaders/loaders.dart';
 
-  class AllProductsController extends GetxController {
+class AllProductsController extends GetxController {
   static AllProductsController get instance => Get.find();
 
   final db = ProductsCloud.instance;
@@ -35,14 +35,14 @@ import 'package:uygunuburda/util/loaders/loaders.dart';
         products.sort((a, b) => b.price.compareTo(a.price));
         break;
       case 'Lower Price':
-        products.sort((a, b) => a.title.compareTo(b.title));
+        products.sort((a, b) => a.price.compareTo(b.price)); // price'a göre sıralama
         break;
-  
       default:
         products.sort((a, b) => a.title.compareTo(b.title));
     }
   }
 
+  // Yeni ürün atamak için metot
   void assignProduct(List<Product> products) {
     this.products.assignAll(products);
     sortProducts('Name');

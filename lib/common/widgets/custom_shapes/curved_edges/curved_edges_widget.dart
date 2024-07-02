@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:uygunuburda/common/widgets/custom_shapes/curved_edges/curved_edges.dart';
 
-class AppCurvedEdgeWidget extends StatelessWidget {
-  const AppCurvedEdgeWidget({
-    super.key, this.child,
-  });
+class AppCurvedEdges extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0, size.height);
 
-  final Widget? child;
+    final firstcurve = Offset(0, size.height - 20);
+    final lastcurve = Offset(30, size.height - 20);
+    path.quadraticBezierTo(
+        firstcurve.dx, firstcurve.dy, lastcurve.dx, lastcurve.dy);
+
+    final secondfirstcurve = Offset(30, size.height - 20);
+    final secondlastcurve = Offset(size.width - 30, size.height - 20);
+    path.quadraticBezierTo(secondfirstcurve.dx, secondfirstcurve.dy,
+        secondlastcurve.dx, secondlastcurve.dy);
+
+    final thirdfirstcurve = Offset(size.width, size.height - 20);
+    final thirdlastcurve = Offset(size.width, size.height);
+    path.quadraticBezierTo(thirdfirstcurve.dx, thirdfirstcurve.dy,
+        thirdlastcurve.dx, thirdlastcurve.dy);
+
+    path.lineTo(size.width, 0);
+    return path;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: AppCustomCurvedEdges(),
-      child: child,
-    );
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
   }
 }
-

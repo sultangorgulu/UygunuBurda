@@ -13,8 +13,8 @@ import 'package:uygunuburda/util/helpers/helper_functions.dart';
 import 'package:uygunuburda/util/shared/box_shadow.dart';
 import 'package:uygunuburda/util/shared/verified_icon_text.dart';
 
-class AppProductItem extends StatelessWidget {
-  const AppProductItem({
+class ProductCardVertical extends StatelessWidget {
+  const ProductCardVertical({
     super.key,
     this.ontap,
     required this.product,

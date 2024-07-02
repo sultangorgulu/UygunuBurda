@@ -9,7 +9,7 @@ import 'package:uygunuburda/util/exceptions/platform_exceptions.dart';
 class ProductsCloud extends GetxController {
   static ProductsCloud get instance => Get.find();
 
-  final db = FirebaseFirestore.instance;
+  final FirebaseFirestore db = FirebaseFirestore.instance;
 
   // Öne çıkan ürünleri çeken metod
   Future<List<Product>> getFeaturedProducts() async {
@@ -112,7 +112,7 @@ class ProductsCloud extends GetxController {
     int limit = -1,
   }) async {
     try {
-      print('categoryId is $categoryId');
+      print('CategoryId is $categoryId');
       final snapshot = limit == -1
           ? await db
               .collection('ProductCategory')
@@ -124,23 +124,23 @@ class ProductsCloud extends GetxController {
               .limit(limit)
               .get();
 
-      List<String> productIds = snapshot.docs
-          .map((doc) => (doc['productId'] as String).trim())
+      List<String> productId = snapshot.docs
+          .map((doc) => (doc['ProductId'] as String).trim())
           .toList();
 
-      print('productIds is $productIds');
+      print('ProductId is $productId');
 
       final products = await db
           .collection('Products')
-          .where(FieldPath.documentId, whereIn: productIds)
+          .where(FieldPath.documentId, whereIn: productId)
           .get();
 
-      print('products docs is ${products.docs}');
+      print('Products docs is ${products.docs}');
 
       final result = products.docs
           .map((product) => Product.fromSnapshot(product))
           .toList();
-      print('products is ${products.size}');
+      print('Products is ${products.size}');
       print('result is $result');
 
       return result;
@@ -156,11 +156,11 @@ class ProductsCloud extends GetxController {
   }
 
   // Kullanıcının favori ürünlerini çeken metod
-  Future<List<Product>> getFavoritedProducts(List<String> productIds) async {
+  Future<List<Product>> getFavoritedProducts(List<String> productId) async {
     try {
       final snapshot = await db
           .collection('Products')
-          .where(FieldPath.documentId, whereIn: productIds)
+          .where(FieldPath.documentId, whereIn: productId)
           .get();
 
       final products =

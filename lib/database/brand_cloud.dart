@@ -11,29 +11,6 @@ class BrandCloud extends GetxController {
   static BrandCloud get instance => Get.find();
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  Future<void> uploadDummyData(List<BrandModel> brands) async {
-    try {
-      final storage = Get.put(FirebaseStorageServices());
-
-      for (var brand in brands) {
-        final file = await storage.getImageDataFromAssets(brand.image);
-        final url = await storage.uploadImageData('Brands', file, brand.image);
-        brand.image = url;
-
-        await db.collection('Brands').doc(brand.id).set(brand.toJson());
-      }
-
-      AppLoaders.successSnackbar(title: 'Data Uploaded');
-    } on FirebaseException catch (e) {
-      throw AppFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const AppFormatException();
-    } on AppPlatformException catch (e) {
-      throw AppPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
-    }
-  }
 
   Future<List<BrandModel>> getAllBrands() async {
     try {

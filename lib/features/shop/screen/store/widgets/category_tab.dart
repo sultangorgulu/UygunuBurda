@@ -58,7 +58,7 @@ class AppCategoryTab extends StatelessWidget {
                           AppGridView(
                             itemcount: snapshot.data!.length,
                             itembuilder: (context, index) {
-                              return AppProductItem(
+                              return ProductCardVertical(
                                 product: snapshot.data![index],
                               );
                             },

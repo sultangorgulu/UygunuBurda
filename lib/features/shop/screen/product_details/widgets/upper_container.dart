@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
@@ -10,6 +9,7 @@ import 'package:uygunuburda/features/shop/screen/home/widgets/favorite_icon.dart
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 
 class UpperContainer extends StatelessWidget {
   const UpperContainer({
@@ -83,7 +83,7 @@ class UpperContainer extends StatelessWidget {
               ),
             ),
             AppAppBar(
-              showBackArrow: true,
+              showbackarrow: true,
               actions: [FavoriteIcon(productId: product.id)],
             )
           ],

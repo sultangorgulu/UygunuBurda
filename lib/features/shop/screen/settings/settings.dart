@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/backend/authentication_repository.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:uygunuburda/common/widgets/list_tiles/user_profile_tile.dart';
 import 'package:uygunuburda/common/widgets/texts/section_heading.dart';
@@ -11,6 +10,7 @@ import 'package:uygunuburda/features/shop/screen/profile/profile.dart';
 import 'package:uygunuburda/features/shop/screen/settings/settings_menu_tile.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

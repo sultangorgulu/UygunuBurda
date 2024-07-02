@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/backend/authentication_repository.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:uygunuburda/features/shop/screen/address/address.dart';
 import 'package:uygunuburda/features/shop/screen/profile/widgets/load_data.dart';
 import 'package:uygunuburda/features/shop/screen/profile/widgets/profile_tile.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/section_title.dart';
 import 'package:uygunuburda/util/shared/user_tile.dart';
 

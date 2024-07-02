@@ -38,6 +38,7 @@ class Product {
       'IsFeatured': isFeatured,
       'CategoryId': categoryid,
       'Brand': brand!.toJson(),
+      'Id' : id,
     };
   }
 
@@ -49,7 +50,7 @@ class Product {
         isFeatured = snapshot.data()!['IsFeatured'] ?? false,
         thumbnail = snapshot.data()!['Thumbnail'] ?? '',
         categoryid = snapshot.data()!['CategoryId'] ?? '',
-        images = snapshot.data()!['Image'] ?? '', // Tek bir resim olarak değiştirildi
+        images = snapshot.data()!['Images'] ?? '',
         brand = BrandModel.fromJson(snapshot.data()!['Brand']);
 
   factory Product.fromQuerySnapshot(
@@ -62,7 +63,7 @@ class Product {
       isFeatured: data['IsFeatured'] ?? false,
       thumbnail: data['Thumbnail'] ?? '',
       categoryid: data['CategoryId'] ?? '',
-      images: data['Images'] ?? '', // Tek bir resim olarak değiştirildi
+      images: data['Images'] ?? '', 
       brand: BrandModel.fromJson(data['Brand'] ?? ''),
     );
   }

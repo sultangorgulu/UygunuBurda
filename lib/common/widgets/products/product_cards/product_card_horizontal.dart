@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:uygunuburda/common/widgets/icons/circular_icons.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
-import 'package:uygunuburda/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:uygunuburda/common/widgets/texts/product_price_text.dart';
 import 'package:uygunuburda/common/widgets/texts/product_title_text.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
 import 'package:uygunuburda/features/personalization/controllers/product_controller.dart';
+import 'package:uygunuburda/features/shop/screen/home/widgets/favorite_icon.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
-import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/helper_functions.dart';
+import 'package:uygunuburda/util/shared/verified_icon_text.dart';
 
-class AppProductCardHorizontal extends StatelessWidget {
-  const AppProductCardHorizontal ({super.key, required this.product});
+class ProductCardHorizontal extends StatelessWidget {
+  const ProductCardHorizontal({super.key, required this.product});
 
   final Product product;
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
-    final controller = ProductController.instance;
-
+    final productcontroller = ProductController.instance;
     return Container(
-      width:310,
+      width: 310,
       padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
-        color: dark ? AppColors.darkerGrey : AppColors.softGrey,
+        color: dark ? AppColors.darkGrey : AppColors.softGrey,
       ),
       child: Row(
         children: [
@@ -36,80 +34,90 @@ class AppProductCardHorizontal extends StatelessWidget {
             height: 120,
             padding: const EdgeInsets.all(AppSizes.sm),
             backgroundcolor: dark ? AppColors.dark : AppColors.light,
-            child:  Stack(
-              children:[
-                const SizedBox(
-                  height: 120,
-                  width: 120,
-                  child: AppRoundedImage(imageurl: AppImages.productImage1, applyImageRadius: true,)
+            child: Stack(
+              children: [
+                AppRoundedImage(
+                  imageurl: product.thumbnail,
+                  roundedborder: true,
+                  isNetworkImage: true,
                 ),
-                
-                Positioned(
-                  top:12,
-                  child: AppRoundedContainer(
-                    radius: AppSizes.sm,
-                    backgroundcolor: AppColors.secondary.withOpacity(0.8),
-                    padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xs),
-                    child: Text('%25', style: Theme.of(context).textTheme.labelLarge!.apply(color: AppColors.black)),
-                  ),
-                ),
-
-                const Positioned(
-                  top: 0,
-                  right: 0,
-                  child: AppCircularIcon(icon: Iconsax.heart, color: Colors.red),
-                ),
-
-                const SizedBox(
-                  width: 172,
-                  child: Column(
-                    children: [
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppProductTitleText(title: 'ürün', smallsize: true),
-                            SizedBox(height: AppSizes.spaceBtwItems / 2),
-                            AppBrandTitleWithVerifiedIcon(title: 'marka'),
-                          ],
-                          ),
-
-                          Spacer(),
-                    ]
-                  )
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Flexible(child: AppProductPriceText(price: '200')),
-
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: AppColors.dark,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(AppSizes.cardRadiusMd),
-                                  bottomRight: Radius.circular(AppSizes.productImageRadius),
-                                ),
-                              ),
-                              child: const SizedBox(
-                                width: AppSizes.iconLg * 1.2,
-                                height: AppSizes.iconLg * 1.2,
-                                child: Center(child: Icon(Iconsax.add, color: AppColors.white)),
-                              )
-                            )
-
-                          ],
-                          ),
-                    ],
+                  Positioned(
+                    top: 10,
+                    child: AppRoundedContainer(
+                      radius: AppSizes.sm,
+                      backgroundcolor: AppColors.secondary.withOpacity(0.8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.sm,
+                        vertical: AppSizes.xs,
+                      ),
                     ),
-                )
-
-
-              ]
-            )
-          );
-        
-    
-    
+                  ),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: FavoriteIcon(productId: product.id),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 190,
+            child: Padding(
+              padding: const EdgeInsets.only(top: AppSizes.sm, left: AppSizes.sm),
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppProductTitleText(
+                        title: product.title,
+                        smallsize: true,
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwItems / 2),
+                      AppVerifiedIconWithText(text: product.brand!.name),
+                    ],
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Column(
+                          children: [
+                            AppProductPriceText(
+                                price:
+                                    productcontroller.getProductPrice(product)),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.dark,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(
+                              AppSizes.cardRadiusMd,
+                            ),
+                            bottomRight:
+                                Radius.circular(AppSizes.productImageRadius),
+                          ),
+                        ),
+                        child: const SizedBox(
+                          height: AppSizes.iconLg * 1.2,
+                          width: AppSizes.iconLg * 1.2,
+                          child: Icon(
+                            Iconsax.add,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

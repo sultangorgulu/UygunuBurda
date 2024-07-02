@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
+import 'package:uygunuburda/common/widgets/products/product_cards/product_card_horizontal.dart';
 import 'package:uygunuburda/features/authentication/models/controller/category_controller.dart';
 import 'package:uygunuburda/features/authentication/models/model/category_model.dart';
 import 'package:uygunuburda/features/shop/screen/all_products/all_products.dart';
@@ -11,6 +9,7 @@ import 'package:uygunuburda/features/shop/screen/sub_category/product_item.dart'
 import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/cloud_helper_functions.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/section_title.dart';
 import 'package:uygunuburda/util/shared/shimmers/horizontal_shimmer_effect.dart';
 
@@ -26,7 +25,7 @@ class SubCategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppAppBar(
         title: Text(category.name),
-        showBackArrow: true,
+        showbackarrow: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -83,7 +82,7 @@ class SubCategoriesScreen extends StatelessWidget {
                                           scrollDirection: Axis.horizontal,
                                           shrinkWrap: true,
                                           itemBuilder: (context, index) =>
-                                              ProductItem(
+                                              ProductCardHorizontal(
                                             product: snapshot.data![index],
                                           ),
                                           separatorBuilder: (context, index) =>

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:uygunuburda/common/widgets/appbar/appbar.dart';
 import 'package:uygunuburda/common/widgets/products/sortable/sortable_products.dart';
 import 'package:uygunuburda/features/authentication/models/model/brand_model.dart';
 import 'package:uygunuburda/features/personalization/controllers/brand_controller.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/cloud_helper_functions.dart';
+import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/product_container.dart';
 import 'package:uygunuburda/util/shared/shimmers/vertical_shimmer_effect.dart';
 
@@ -24,7 +23,7 @@ class BrandProducts extends StatelessWidget {
     return Scaffold(
       appBar: AppAppBar(
         title: Text(brand.name),
-        showBackArrow: true,
+        showbackarrow: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
