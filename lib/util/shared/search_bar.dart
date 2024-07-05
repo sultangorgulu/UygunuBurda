@@ -47,10 +47,20 @@ class AppSearchBar extends StatelessWidget {
               color: AppColors.darkGrey,
             ),
             const SizedBox(width: AppSizes.spaceBtwItems),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.bodySmall,
-            )
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: text,
+                  border: InputBorder.none,
+                  isCollapsed: true,
+                ),
+                style: Theme.of(context).textTheme.bodySmall,
+                onChanged: (value) {
+                  // Burada arama işlemi için bir işlevi çağırabilirsiniz
+                  print("Arama yapılıyor: $value");
+                },
+              ),
+            ),
           ],
         ),
       ),

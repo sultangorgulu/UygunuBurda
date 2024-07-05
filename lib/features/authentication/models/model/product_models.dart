@@ -67,4 +67,7 @@ class Product {
       brand: BrandModel.fromJson(data['Brand'] ?? ''),
     );
   }
-}
+  bool matchesSearchTerm(String searchTerm) {
+  return title.toLowerCase().contains(searchTerm.toLowerCase()) ;
+
+}}

@@ -37,16 +37,9 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       HomeAppBar(),
                       SizedBox(height: AppSizes.spaceBtwSections),
-                      AppSearchBar(
-                        text: 'Search in Store',
-                        showbackground: true,
-                        showborder: true,
-                      ),
+
                       SizedBox(height: AppSizes.spaceBtwSections),
-                      LocationSearchBar( // LocationSearchBar eklendi
-                        showBackground: true,
-                        showBorder: true,
-                      ),
+
                       SizedBox(height: AppSizes.spaceBtwSections),
                       Padding(
                         padding: const EdgeInsets.only(left: AppSizes.defaultSpace),

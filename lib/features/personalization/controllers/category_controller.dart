@@ -34,7 +34,7 @@ class CategoryController extends GetxController {
             .where(
               (category) => category.isFeatured && category.parentId.isEmpty,
             )
-            .take(8)
+            .take(17)
             .toList(),
       );
     } catch (e) {

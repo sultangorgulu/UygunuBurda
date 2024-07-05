@@ -38,6 +38,7 @@ class ProductController extends GetxController {
       return [];
     }
   }
+  
 
   String getProductPrice(Product product) {
     return product.price.toString();

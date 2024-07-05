@@ -1,30 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LocationModel {
-  String id;
-  String city;
-  String district;
-  String neighborhood;
+  final String city;
+  final String districts;
+  final String neighborhoods;
+  final String id;
 
   LocationModel({
-    required this.id,
     required this.city,
-    required this.district,
-    required this.neighborhood,
+    required this.districts,
+    required this.neighborhoods,
+    required this.id,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      'Id': id,
-      'City': city,
-      'District': district,
-      'Neighborhood': neighborhood,
-    };
+  factory LocationModel.fromSnapshot(DocumentSnapshot snapshot) {
+    return LocationModel(
+      city: snapshot['City'] as String,
+      districts: snapshot['Districts'] as String,
+      neighborhoods: snapshot['Neighborhoods'] as String,
+      id: snapshot.id,
+    );
   }
-
-  LocationModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
-      : id = snapshot.id,
-        city = snapshot.data()!['City'] ?? '',
-        district = snapshot.data()!['District'] ?? '',
-        neighborhood = snapshot.data()!['Neighborhood'] ?? '';
 }

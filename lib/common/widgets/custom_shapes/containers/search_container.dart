@@ -7,7 +7,13 @@ import 'package:uygunuburda/util/helpers/helper_functions.dart';
 
 class AppSearchContainer extends StatelessWidget {
   const AppSearchContainer({
-    super.key, required this.text, this.icon = Iconsax.search_normal, this.showBackground = true, this.showBorder = true, this.onTap, this.padding =  const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace),
+    super.key,
+    required this.text,
+    this.icon = Iconsax.search_normal,
+    this.showBackground = true,
+    this.showBorder = true,
+    this.onTap,
+    this.padding = const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace),
   });
 
   final String text;
@@ -28,24 +34,32 @@ class AppSearchContainer extends StatelessWidget {
           width: AppDeviceUtils.getScreenWidth(context),
           padding: const EdgeInsets.all(AppSizes.md),
           decoration: BoxDecoration(
-            color: showBackground ? dark ? AppColors.dark: AppColors.light: Colors.transparent,
+            color: showBackground ? dark ? AppColors.dark : AppColors.light : Colors.transparent,
             borderRadius: BorderRadius.circular(AppSizes.cardRadiusLg),
-            border: Border.all(color: AppColors.grey)
+            border: Border.all(color: AppColors.grey),
           ),
-          child:  Row(
+          child: Row(
             children: [
-              Icon(icon, color:AppColors.darkerGrey),
+              Icon(icon, color: AppColors.darkerGrey),
               const SizedBox(width: AppSizes.spaceBtwItems),
-              Text(text, style:Theme.of(context).textTheme.bodySmall),
-      
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: text,
+                    border: InputBorder.none,
+                    isCollapsed: true,
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
+                  onChanged: (value) {
+                    // Burada arama işlemi için bir işlevi çağırabilirsiniz
+                    print("Arama yapılıyor: $value");
+                  },
+                ),
+              ),
             ],
-      
           ),
-        )
-      
-      
+        ),
       ),
     );
   }
 }
-

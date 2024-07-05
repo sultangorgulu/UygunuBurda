@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/features/personalization/controllers/location_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
@@ -9,14 +8,16 @@ import 'package:uygunuburda/util/helpers/helper_functions.dart';
 
 class LocationSearchBar extends StatefulWidget {
   const LocationSearchBar({
-    super.key,
+    Key? key,
     required this.showBackground,
     required this.showBorder,
+    required this.onNeighborhoodSelected,
     this.padding = const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace),
-  });
+  }) : super(key: key);
 
   final bool showBackground, showBorder;
   final EdgeInsetsGeometry padding;
+  final void Function(int neighborhoodId) onNeighborhoodSelected;
 
   @override
   _LocationSearchBarState createState() => _LocationSearchBarState();
@@ -27,13 +28,73 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
   String? selectedDistrict;
   String? selectedNeighborhood;
 
-  // Location verilerini çekmek için controller
-  final locationController = Get.find<LocationController>();
-
-  // PopUp için controller
   late TextEditingController cityController;
   late TextEditingController districtController;
   late TextEditingController neighborhoodController;
+
+  final List<Map<String, dynamic>> cities = [
+    {
+      'name': 'Balıkesir',
+      'districts': [
+        {
+          'name': 'Bandırma',
+          'neighborhoods': [
+            {'id': 40, 'name': '100.Yıl Mahallesi'},
+            {'id': 1, 'name': '17 Eylül Mahallesi'},
+            {'id': 41, 'name': '600 Evler Mahallesi'},
+            {'id': 28, 'name': 'Akçapınar Mahallesi'},
+            {'id': 20, 'name': 'Aksakal Mahallesi'},
+            {'id': 15, 'name': 'Ayyıldız Mahallesi'},
+            {'id': 13, 'name': 'Bentbaşı Mahallesi'},
+            {'id': 24, 'name': 'Bereketli Mahallesi'},
+            {'id': 43, 'name': 'Beyköy Mahallesi'},
+            {'id': 33, 'name': 'Bezirci Mahallesi'},
+            {'id': 31, 'name': 'Çalışkanlar Mahallesi'},
+            {'id': 48, 'name': 'Çarıkköy Mahallesi'},
+            {'id': 37, 'name': 'Çepni Mahallesi'},
+            {'id': 8, 'name': 'Çınarlı Mahallesi'},
+            {'id': 42, 'name': 'Çinge Mahallesi'},
+            {'id': 18, 'name': 'Dere Mahallesi'},
+            {'id': 32, 'name': 'Doğanpınar Mahallesi'},
+            {'id': 21, 'name': 'Doğruca Mahallesi'},
+            {'id': 44, 'name': 'Dutliman Mahallesi'},
+            {'id': 10, 'name': 'Edincik Mahallesi'},
+            {'id': 38, 'name': 'Emre Mahallesi'},
+            {'id': 30, 'name': 'Ergili Mahallesi'},
+            {'id': 26, 'name': 'Erikli Mahallesi'},
+            {'id': 39, 'name': 'Eskiziraatli Mahallesi'},
+            {'id': 34, 'name': 'Gölyaka Mahallesi'},
+            {'id': 17, 'name': 'Günaydın Mahallesi'},
+            {'id': 6, 'name': 'Hacı Yusuf Mahallesi'},
+            {'id': 19, 'name': 'Haydar Çavuş Mahallesi'},
+            {'id': 45, 'name': 'Hıdırköy Mahallesi'},
+            {'id': 2, 'name': 'İhsaniye Mahallesi'},
+            {'id': 11, 'name': 'Kayacık Mahallesi'},
+            {'id': 46, 'name': 'Kirazlı Mahallesi'},
+            {'id': 25, 'name': 'Kuşcenneti Mahallesi'},
+            {'id': 29, 'name': 'Külefli Mahallesi'},
+            {'id': 9, 'name': 'Levent Mahallesi'},
+            {'id': 47, 'name': 'Mahbubeler Mahallesi'},
+            {'id': 36, 'name': 'Orhaniye Mahallesi'},
+            {'id': 12, 'name': 'Ömerli Mahallesi'},
+            {'id': 3, 'name': 'Paşabayır Mahallesi'},
+            {'id': 7, 'name': 'Paşakent Mahallesi'},
+            {'id': 5, 'name': 'Paşakonak Mahallesi'},
+            {'id': 16, 'name': 'Paşamescit Mahallesi'},
+            {'id': 4, 'name': 'Sunullah Mahallesi'},
+            {'id': 14, 'name': 'Yeni Mahallesi'},
+            {'id': 23, 'name': 'Yenice Mahallesi'},
+            {'id': 35, 'name': 'Yenisığırcı Mahallesi'},
+            {'id': 22, 'name': 'Yeniyenice Mahallesi'},
+            {'id': 49, 'name': 'Yeniziraatli Mahallesi'},
+            {'id': 27, 'name': 'Yeşilçomlu Mahallesi'},
+          ],
+        },
+        // Diğer ilçeler...
+      ],
+    },
+    // Diğer şehirler...
+  ];
 
   @override
   void initState() {
@@ -85,7 +146,13 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
                   padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
                   child: Row(
                     children: [
-                      Text(selectedCity ?? "Şehir"),
+                      Expanded(
+                        child: Text(
+                          selectedCity ?? "Şehir",
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      ),
                       const Icon(Icons.arrow_drop_down),
                     ],
                   ),
@@ -102,7 +169,13 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
                   padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
                   child: Row(
                     children: [
-                      Text(selectedDistrict ?? "İlçe"),
+                      Expanded(
+                        child: Text(
+                          selectedDistrict ?? "İlçe",
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      ),
                       const Icon(Icons.arrow_drop_down),
                     ],
                   ),
@@ -123,9 +196,7 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
                         child: Text(
                           selectedNeighborhood ?? "Mahalle",
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
+                          style: const TextStyle(fontSize: 14),
                         ),
                       ),
                       const Icon(Icons.arrow_drop_down),
@@ -140,40 +211,38 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
     );
   }
 
-  // Şehir seçim popUp'ı
   void _showCityPicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Obx(() => Container(
+        return Container(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: locationController.allLocations
-                .where((location) => location.district == null)
-                .map((city) => ListTile(
-                      title: Text(city.city),
-                      onTap: () {
-                        setState(() {
-                          selectedCity = city.city;
-                          selectedDistrict = null;
-                          selectedNeighborhood = null;
-                          cityController.text = city.city;
-                        });
-                        Navigator.pop(context);
-                      },
-                    ))
-                .toList(),
+          height: MediaQuery.of(context).size.height * 0.5,
+          child: ListView.builder(
+            itemCount: cities.length,
+            itemBuilder: (context, index) {
+              final city = cities[index];
+              return ListTile(
+                title: Text(city['name']),
+                onTap: () {
+                  setState(() {
+                    selectedCity = city['name'];
+                    selectedDistrict = null;
+                    selectedNeighborhood = null;
+                    cityController.text = city['name'];
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            },
           ),
-        ));
+        );
       },
     );
   }
 
-  // İlçe seçim popUp'ı
   void _showDistrictPicker(BuildContext context) {
     if (selectedCity == null) {
-      // Şehir seçilmediyse uyarı mesajı
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Lütfen önce bir şehir seçin."),
@@ -182,37 +251,39 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
       return;
     }
 
+    final selectedCityData = cities.firstWhere((city) => city['name'] == selectedCity);
+    final List<Map<String, dynamic>> districts = selectedCityData['districts'];
+
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Obx(() => Container(
+        return Container(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: locationController.allLocations
-                .where((location) => location.city == selectedCity)
-                .map((district) => ListTile(
-                      title: Text(district.district),
-                      onTap: () {
-                        setState(() {
-                          selectedDistrict = district.district;
-                          selectedNeighborhood = null;
-                          districtController.text = district.district;
-                        });
-                        Navigator.pop(context);
-                      },
-                    ))
-                .toList(),
+          height: MediaQuery.of(context).size.height * 0.5,
+          child: ListView.builder(
+            itemCount: districts.length,
+            itemBuilder: (context, index) {
+              final district = districts[index];
+              return ListTile(
+                title: Text(district['name']),
+                onTap: () {
+                  setState(() {
+                    selectedDistrict = district['name'];
+                    selectedNeighborhood = null;
+                    districtController.text = district['name'];
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            },
           ),
-        ));
+        );
       },
     );
   }
 
-  // Mahalle seçim popUp'ı
   void _showNeighborhoodPicker(BuildContext context) {
     if (selectedDistrict == null) {
-      // İlçe seçilmediyse uyarı mesajı
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Lütfen önce bir ilçe seçin."),
@@ -221,35 +292,34 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
       return;
     }
 
+    final selectedCityData = cities.firstWhere((city) => city['name'] == selectedCity);
+    final selectedDistrictData = selectedCityData['districts'].firstWhere((district) => district['name'] == selectedDistrict);
+    final List<Map<String, dynamic>> neighborhoods = selectedDistrictData['neighborhoods'];
+
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // Ekranın alt kenarına ulaşmasını önlemek için
       builder: (context) {
-        return Obx(() => Container(
+        return Container(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: locationController.allLocations
-                .where((location) => location.district == selectedDistrict)
-                .map((neighborhood) => ListTile(
-                      title: Text(
-                        neighborhood.neighborhood,
-                        overflow: TextOverflow.ellipsis, // Taşmayı önlemek için
-                        style: const TextStyle(
-                          fontSize: 14, // Metin boyutunu ayarla
-                        ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          selectedNeighborhood = neighborhood.neighborhood;
-                          neighborhoodController.text = neighborhood.neighborhood;
-                        });
-                        Navigator.pop(context);
-                      },
-                    ))
-                .toList(),
+          height: MediaQuery.of(context).size.height * 0.5,
+          child: ListView.builder(
+            itemCount: neighborhoods.length,
+            itemBuilder: (context, index) {
+              final neighborhood = neighborhoods[index];
+              return ListTile(
+                title: Text(neighborhood['name']),
+                onTap: () {
+                  setState(() {
+                    selectedNeighborhood = neighborhood['name'];
+                    neighborhoodController.text = neighborhood['name'];
+                  });
+                  widget.onNeighborhoodSelected(neighborhood['id']);
+                  Navigator.pop(context);
+                },
+              );
+            },
           ),
-        ));
+        );
       },
     );
   }

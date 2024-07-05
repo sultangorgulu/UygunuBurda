@@ -20,7 +20,7 @@ class LocationController extends GetxController {
     try {
       isLoading.value = true;
       final locations = await locationCloud.getAllLocations();
-      allLocations.assignAll(locations); // allLocations listesini güncelle
+      allLocations.assignAll(locations);
     } catch (e) {
       AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
     } finally {
@@ -37,8 +37,7 @@ class LocationController extends GetxController {
     }
   }
 
-  Future<List<LocationModel>> getLocationsForCity(
-      {required String cityName}) async {
+  Future<List<LocationModel>> getLocationsForCity({required String cityName}) async {
     try {
       return await locationCloud.getLocationsForCity(cityName: cityName);
     } catch (e) {
@@ -47,11 +46,9 @@ class LocationController extends GetxController {
     }
   }
 
-  Future<List<LocationModel>> getLocationsForDistrict(
-      {required String districtName}) async {
+  Future<List<LocationModel>> getLocationsForDistricts({required String districtsName}) async {
     try {
-      return await locationCloud.getLocationsForDistrict(
-          districtName: districtName);
+      return await locationCloud.getLocationsForDistricts(districtsName: districtsName);
     } catch (e) {
       AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
       return [];

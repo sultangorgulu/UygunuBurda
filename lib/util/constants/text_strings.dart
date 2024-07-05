@@ -17,7 +17,7 @@ class AppTexts{
   static const String onBoardingSubTitle3 ="";
   static const String onBoardingSubTitle4 ="";
 
-  static const String homeAppbarTitle ="Merhaba";
+  static const String homeAppbarTitle ="";
   static const String homeAppbarSubTitle ="merhabaa";
 
   static const String firstName = "First Name";

@@ -115,7 +115,7 @@ class LoadDataScreen extends StatelessWidget {
               ),
               Text(
                 'Make sure you have already uploaded all the content above.',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
               Column(
                 children: [

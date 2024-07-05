@@ -32,10 +32,7 @@ class CategoryCloud extends GetxController {
 
   Future<List<CategoryModel>> getSubCategories(String categoryId) async {
     try {
-      final snapshot = await db
-          .collection('Categories')
-          .where('ParentId', isEqualTo: categoryId)
-          .get();
+      final snapshot = await db.collection('Categories').get();
       final subcategories =
           snapshot.docs.map((e) => CategoryModel.fromSnapshot(e)).toList();
       return subcategories;

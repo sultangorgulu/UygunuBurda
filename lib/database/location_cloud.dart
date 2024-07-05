@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/features/authentication/models/model/location_model.dart';
 import 'package:uygunuburda/util/exceptions/firebase_exceptions.dart';
@@ -11,13 +10,12 @@ class LocationCloud extends GetxController {
   static LocationCloud get instance => Get.find();
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-Future<List<LocationModel>> getAllLocations() async {
-  try {
-    final snapshot = await db.collection('Locations').get();
-    return snapshot.docs
-        .map((location) => LocationModel.fromSnapshot(location))
-        .toList(); 
-  
+  Future<List<LocationModel>> getAllLocations() async {
+    try {
+      final snapshot = await db.collection('Locations').get();
+      return snapshot.docs
+          .map((location) => LocationModel.fromSnapshot(location))
+          .toList();
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -29,7 +27,7 @@ Future<List<LocationModel>> getAllLocations() async {
     }
   }
 
-    Future<LocationModel?> getLocationById({required String locationId}) async { // locationId parametresi eklendi
+  Future<LocationModel?> getLocationById({required String locationId}) async {
     try {
       final snapshot = await db.collection('Locations').doc(locationId).get();
       if (snapshot.exists) {
@@ -46,8 +44,8 @@ Future<List<LocationModel>> getAllLocations() async {
       throw 'Something went wrong, Please try again';
     }
   }
-  Future<List<LocationModel>> getLocationsForCity(
-      {required String cityName}) async {
+
+  Future<List<LocationModel>> getLocationsForCity({required String cityName}) async {
     try {
       final snapshot = await db
           .collection('Locations')
@@ -67,12 +65,11 @@ Future<List<LocationModel>> getAllLocations() async {
     }
   }
 
-  Future<List<LocationModel>> getLocationsForDistrict(
-      {required String districtName}) async {
+  Future<List<LocationModel>> getLocationsForDistricts({required String districtsName}) async {
     try {
       final snapshot = await db
           .collection('Locations')
-          .where('District', isEqualTo: districtName)
+          .where('Districts', isEqualTo: districtsName)
           .get();
       return snapshot.docs
           .map((location) => LocationModel.fromSnapshot(location))

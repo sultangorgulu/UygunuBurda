@@ -71,12 +71,7 @@ class AppProductContainer extends StatelessWidget {
                       )
                     ],
                   ),
-                  Text(
-                    '${brand.productsCount ?? 0} products',
-                    style: Theme.of(context).textTheme.labelMedium,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+
                 ],
               ),
             ),

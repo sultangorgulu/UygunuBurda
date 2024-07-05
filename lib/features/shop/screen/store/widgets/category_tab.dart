@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/features/authentication/models/controller/category_controller.dart';
 import 'package:uygunuburda/features/authentication/models/model/category_model.dart';
+import 'package:uygunuburda/features/personalization/controllers/category_controller.dart';
 import 'package:uygunuburda/features/shop/screen/all_products/all_products.dart';
 import 'package:uygunuburda/features/shop/screen/home/widgets/product_item.dart';
 import 'package:uygunuburda/features/shop/screen/store/widgets/category_brand.dart';

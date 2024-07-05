@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
-import 'package:uygunuburda/features/authentication/models/controller/category_controller.dart';
+import 'package:uygunuburda/features/personalization/controllers/category_controller.dart';
 import 'package:uygunuburda/features/shop/screen/home/widgets/category_shimmer.dart';
 import 'package:uygunuburda/features/shop/screen/sub_category/sub_categories.dart';
 import 'package:uygunuburda/util/constants/colors.dart';

@@ -17,7 +17,7 @@ class ProductsCloud extends GetxController {
       final documents = await db
           .collection('Products')
           .where('IsFeatured', isEqualTo: true)
-          .limit(4)
+          .limit(8)
           .get();
 
       return documents.docs.map((e) => Product.fromSnapshot(e)).toList();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/common/widgets/appbar/tabbar.dart';
-import 'package:uygunuburda/features/authentication/models/controller/category_controller.dart';
 import 'package:uygunuburda/features/personalization/controllers/brand_controller.dart';
+import 'package:uygunuburda/features/personalization/controllers/category_controller.dart';
 import 'package:uygunuburda/features/shop/screen/brand/brand_products.dart';
 import 'package:uygunuburda/features/shop/screen/brands/brands.dart';
 import 'package:uygunuburda/features/shop/screen/store/widgets/category_tab.dart';
@@ -13,7 +13,7 @@ import 'package:uygunuburda/util/shared/app_bar.dart';
 import 'package:uygunuburda/util/shared/shimmers/brand_shimmer.dart';
 import 'package:uygunuburda/util/shared/gridview.dart';
 import 'package:uygunuburda/util/shared/product_container.dart';
-import 'package:uygunuburda/util/shared/search_bar.dart';
+import 'package:uygunuburda/util/shared/location_bar.dart';
 import 'package:uygunuburda/util/shared/section_title.dart';
 
 class StoreScreen extends StatelessWidget {
@@ -51,17 +51,15 @@ class StoreScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         const SizedBox(height: AppSizes.spaceBtwItems),
-                        const AppSearchBar(
-                          text: 'Search in Store',
-                          showbackground: false,
-                          showborder: true,
-                          padding: EdgeInsets.zero,
-                        ),
+                        LocationSearchBar( // LocationSearchBar eklendi
+                        showBackground: true,
+                        showBorder: true, onNeighborhoodSelected: (int ) {  },
+                      ),
                         const SizedBox(height: AppSizes.spaceBtwItems),
                         AppSectionTitle(
                           title: 'Featured Brands',
                           showactionbutton: true,
-                          onPressed: () => Get.to(() => const BrandsScreen()),
+                          onPressed: () => Get.to(() => const BrandsScreen(neighborhood: '',)),
                         ),
                         const SizedBox(height: AppSizes.spaceBtwItems / 2),
                         Obx(() {
