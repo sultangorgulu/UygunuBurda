@@ -29,7 +29,7 @@ class AddressCloud extends GetxController {
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 

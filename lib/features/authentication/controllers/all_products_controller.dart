@@ -19,7 +19,7 @@ class AllProductsController extends GetxController {
 
       return products;
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }

@@ -8,7 +8,8 @@ import 'package:uygunuburda/util/helpers/helper_functions.dart';
 class AppSearchBar extends StatelessWidget {
   const AppSearchBar({
     super.key,
-    required this.text,
+    required this.onSearch,
+    required this.onSubmit,
     required this.showbackground,
     required this.showborder,
     this.icon = Iconsax.search_normal,
@@ -16,18 +17,20 @@ class AppSearchBar extends StatelessWidget {
   });
 
   final IconData? icon;
-  final String text;
+  final ValueChanged<String> onSearch;
+  final ValueChanged<String> onSubmit;
   final bool showbackground, showborder;
   final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
     final isdark = AppHelperFunctions.isDarkMode(context);
+    TextEditingController _controller = TextEditingController();
     return Padding(
       padding: padding,
       child: Container(
         width: AppDeviceUtils.getScreenWidth(context),
-        padding: const EdgeInsets.all(AppSizes.md),
+        padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: AppSizes.sm), // Yüksekliği azaltmak için vertical padding
         decoration: BoxDecoration(
           color: showbackground
               ? isdark
@@ -35,32 +38,33 @@ class AppSearchBar extends StatelessWidget {
                   : AppColors.light
               : Colors.transparent,
           borderRadius:
-              showborder ? BorderRadius.circular(AppSizes.cardRadiusLg) : null,
+              showborder ? BorderRadius.circular(AppSizes.cardRadiusMd) : null,
           border: Border.all(
-            color: AppColors.grey,
+            color: AppColors.grey.withOpacity(0.2), // Daha transparan renk
           ),
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: AppColors.darkGrey,
-            ),
+
             const SizedBox(width: AppSizes.spaceBtwItems),
             Expanded(
               child: TextField(
+                controller: _controller,
                 decoration: InputDecoration(
-                  hintText: text,
+                  hintText: '   Search...',
                   border: InputBorder.none,
-                  isCollapsed: true,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 8.0), // TextField içindeki padding
                 ),
-                style: Theme.of(context).textTheme.bodySmall,
-                onChanged: (value) {
-                  // Burada arama işlemi için bir işlevi çağırabilirsiniz
-                  print("Arama yapılıyor: $value");
-                },
+                onChanged: onSearch,
+                onSubmitted: onSubmit,
               ),
             ),
+            IconButton(
+              icon: Icon(Iconsax.search_normal),
+              onPressed: () {
+                onSubmit(_controller.text);
+              },
+            )
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +12,8 @@ import 'package:uygunuburda/features/shop/screen/home/widgets/promo_slider.dart'
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/shared/gridview.dart';
-import 'package:uygunuburda/util/shared/location_bar.dart';
 import 'package:uygunuburda/util/shared/search_bar.dart';
+import 'package:uygunuburda/util/shared/search_page.dart';
 import 'package:uygunuburda/util/shared/section_title.dart';
 import 'package:uygunuburda/util/shared/shimmers/vertical_shimmer_effect.dart';
 
@@ -26,9 +24,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productController = Get.put(ProductController());
     return Scaffold(
-      body: GetBuilder<LocationController>( // LocationController'ı GetBuilder içinde başlat
+      body: GetBuilder<LocationController>(
         init: LocationController(),
-        builder: (locationController) { // LocationController'ı kullan
+        builder: (locationController) {
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -37,12 +35,24 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       HomeAppBar(),
                       SizedBox(height: AppSizes.spaceBtwSections),
-
-                      SizedBox(height: AppSizes.spaceBtwSections),
-
-                      SizedBox(height: AppSizes.spaceBtwSections),
-                      Padding(
-                        padding: const EdgeInsets.only(left: AppSizes.defaultSpace),
+                      AppSearchBar(
+                        showbackground: true,
+                        showborder: true,
+                        onSearch: (String value) {},
+                        onSubmit: (String value) {
+                          if (value.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SearchPage(searchQuery: value),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(height: AppSizes.spaceBtwSections),
+                      const Padding(
+                        padding: EdgeInsets.only(left: AppSizes.defaultSpace),
                         child: Column(
                           children: [
                             AppSectionTitle(
@@ -72,15 +82,14 @@ class HomeScreen extends StatelessWidget {
                               .collection('Products')
                               .where('IsFeatured', isEqualTo: true)
                               .limit(6),
-                          futuremethod:
-                              productController.fetchAllFeaturedProducts(),
+                          futuremethod: productController.fetchAllFeaturedProducts(),
                         )),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(AppSizes.defaultSpace),
                   child: Obx(() {
-                    if (productController.isloading.value) {
+                    if (productController.isLoading.value) {
                       return const AppVerticalShimmerEffect();
                     }
 

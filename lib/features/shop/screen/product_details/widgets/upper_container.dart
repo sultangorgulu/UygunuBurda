@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
@@ -42,43 +42,6 @@ class UpperContainer extends StatelessWidget {
                           imageUrl: controller.selectedImage.value),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 30,
-              right: 0,
-              left: AppSizes.defaultSpace,
-              child: SizedBox(
-                height: 80,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: images.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    width: AppSizes.defaultSpace,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Obx(() {
-                      final selectedImage =
-                          controller.selectedImage.value == images[index];
-                      return AppRoundedImage(
-                        width: 80,
-                        imageurl: images[index],
-                        isNetworkImage: true,
-                        padding: const EdgeInsets.all(AppSizes.sm),
-                        border: Border.all(
-                          color: selectedImage
-                              ? AppColors.primary
-                              : Colors.transparent,
-                        ),
-                        backgroundcolor: dark ? AppColors.dark : AppColors.light,
-                        onPressed: () =>
-                            controller.selectedImage.value = images[index],
-                      );
-                    });
-                  },
                 ),
               ),
             ),

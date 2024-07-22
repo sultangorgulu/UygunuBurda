@@ -9,6 +9,8 @@ import 'package:uygunuburda/util/exceptions/platform_exceptions.dart';
 class ProductsCloud extends GetxController {
   static ProductsCloud get instance => Get.find();
 
+  
+
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   // Öne çıkan ürünleri çeken metod
@@ -29,7 +31,7 @@ class ProductsCloud extends GetxController {
       throw AppPlatformException(e.code).message;
     } catch (e) {
       print(e.toString());
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 
@@ -50,9 +52,10 @@ class ProductsCloud extends GetxController {
       throw AppPlatformException(e.code).message;
     } catch (e) {
       print(e.toString());
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
+  
 
   // Belirli bir sorguya göre ürünleri çeken metod
   Future<List<Product>> fetchProductsByQuery(Query query) async {
@@ -69,7 +72,7 @@ class ProductsCloud extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 
@@ -102,58 +105,68 @@ class ProductsCloud extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 
   // Belirli bir kategori için ürünleri çeken metod
-  Future<List<Product>> getProductsForCategory({
-    required String categoryId,
-    int limit = -1,
-  }) async {
-    try {
-      print('CategoryId is $categoryId');
-      final snapshot = limit == -1
-          ? await db
-              .collection('ProductCategory')
-              .where('CategoryId', isEqualTo: categoryId)
-              .get()
-          : await db
-              .collection('ProductCategory')
-              .where('CategoryId', isEqualTo: categoryId)
-              .limit(limit)
-              .get();
+ Future<List<Product>> getProductsForCategory({
+  required String categoryId,
+  int limit = -1,
+}) async {
+  try {
+    print('CategoryId is $categoryId');
+    final snapshot = limit == -1
+        ? await db
+            .collection('ProductCategory')
+            .where('CategoryId', isEqualTo: categoryId)
+            .get()
+        : await db
+            .collection('ProductCategory')
+            .where('CategoryId', isEqualTo: categoryId)
+            .limit(limit)
+            .get();
 
-      List<String> productId = snapshot.docs
-          .map((doc) => (doc['ProductId'] as String).trim())
-          .toList();
+    List<String> productId = snapshot.docs
+        .map((doc) => (doc['ProductId'] as String).trim())
+        .toList();
 
-      print('ProductId is $productId');
+    print('ProductId is $productId');
+
+    List<Product> allProducts = [];
+
+    // Firestore'da whereIn ile sorgu limitini 10 ID ile sınırlı tutarak parça parça sorgulama yapma
+    for (var i = 0; i < productId.length; i += 10) {
+      var end = (i + 10 < productId.length) ? i + 10 : productId.length;
+      var productIdChunk = productId.sublist(i, end);
 
       final products = await db
           .collection('Products')
-          .where(FieldPath.documentId, whereIn: productId)
+          .where(FieldPath.documentId, whereIn: productIdChunk)
           .get();
 
       print('Products docs is ${products.docs}');
 
-      final result = products.docs
+      allProducts.addAll(products.docs
           .map((product) => Product.fromSnapshot(product))
-          .toList();
-      print('Products is ${products.size}');
-      print('result is $result');
-
-      return result;
-    } on FirebaseException catch (e) {
-      throw AppFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const AppFormatException();
-    } on PlatformException catch (e) {
-      throw AppPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong, Please try again';
+          .toList());
     }
+
+    print('Products is ${allProducts.length}');
+    print('result is $allProducts');
+
+    return allProducts;
+  } on FirebaseException catch (e) {
+    throw AppFirebaseException(e.code).message;
+  } on FormatException catch (_) {
+    throw const AppFormatException();
+  } on PlatformException catch (e) {
+    throw AppPlatformException(e.code).message;
+  } catch (e) {
+    throw '';
   }
+}
+
 
   // Kullanıcının favori ürünlerini çeken metod
   Future<List<Product>> getFavoritedProducts(List<String> productId) async {
@@ -174,7 +187,7 @@ class ProductsCloud extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 }

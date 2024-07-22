@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:uygunuburda/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
+import 'package:uygunuburda/common/widgets/texts/product_title_text.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
 import 'package:uygunuburda/features/personalization/controllers/product_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
@@ -19,48 +21,41 @@ class AppProductMetaData extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
     final productController = ProductController.instance;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Iconsax.star5, color: Colors.amber, size: 24),
-                  const SizedBox(width: AppSizes.spaceBtwItems / 2),
-                  Text.rich(TextSpan(children: [
-                    TextSpan(
-                      text: '5.0',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const TextSpan(text: '(199)'),
-                  ]))
-                ],
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.share,
-                  size: AppSizes.md,
-                ),
+              Text(
+                '\₺${productController.getProductPrice(product)}',
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ],
           ),
           const SizedBox(height: AppSizes.spaceBtwItems),
+          AppProductTitleText(title: product.title),
+          const SizedBox(height: AppSizes.spaceBtwItems / 1.5),
           Row(
             children: [
-              AppRoundedImage(
-                imageurl: product.brand != null ? product.brand!.image : '',
-                height: 32,
-                width: 32,
-                backgroundcolor: dark ? AppColors.dark : AppColors.light,
-              ),
+              if (product.brand?.image != null && product.brand!.image.isNotEmpty) 
+                AppRoundedImage(
+                  imageurl: product.brand!.image,
+                  height: 32,
+                  width: 32,
+                  backgroundcolor: dark ? AppColors.dark : AppColors.light,
+                )
+              else
+                Container(
+                  height: 32,
+                  width: 32,
+                  color: AppColors.grey, // Placeholder color
+                ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Text(
-                product.brand != null ? product.brand!.name : '',
+                product.brand != null ? product.brand!.name : 'No Brand',
                 style: Theme.of(context).textTheme.titleLarge,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,

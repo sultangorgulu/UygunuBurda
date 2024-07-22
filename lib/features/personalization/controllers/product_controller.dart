@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
@@ -7,8 +8,8 @@ class ProductController extends GetxController {
   static ProductController get instance => Get.find();
 
   RxList<Product> allProducts = <Product>[].obs;
-  final isloading = false.obs;
-  final productcloud = Get.put(ProductsCloud());
+  final isLoading = false.obs;
+  final productCloud = Get.put(ProductsCloud());
 
   @override
   void onInit() {
@@ -18,23 +19,23 @@ class ProductController extends GetxController {
 
   fetchFeaturedProducts() async {
     try {
-      isloading.value = true;
-      final products = await productcloud.getFeaturedProducts();
+      isLoading.value = true;
+      final products = await productCloud.getFeaturedProducts();
       allProducts.assignAll(products);
     } catch (e) {
       AppLoaders.errorSnackbar(
-          title: 'Oh Snap in productController!', message: e.toString());
+          title: ' in productController!', message: e.toString());
     } finally {
-      isloading.value = false;
+      isLoading.value = false;
     }
   }
 
   Future<List<Product>> fetchAllFeaturedProducts() async {
     try {
-      final products = await productcloud.getAllFeaturedProducts();
+      final products = await productCloud.getAllFeaturedProducts();
       return products;
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }
@@ -42,5 +43,20 @@ class ProductController extends GetxController {
 
   String getProductPrice(Product product) {
     return product.price.toString();
+  }
+
+   Future<void> searchProducts(String query) async {
+    isLoading(true);
+    try {
+      var products = await ProductsCloud.instance.fetchProductsByQuery(
+        FirebaseFirestore.instance
+            .collection('Products')
+            .where('Title', isGreaterThanOrEqualTo: query)
+            .where('Title', isLessThanOrEqualTo: query + '\uf8ff'),
+      );
+      allProducts.assignAll(products);
+    } finally {
+      isLoading(false);
+    }
   }
 }

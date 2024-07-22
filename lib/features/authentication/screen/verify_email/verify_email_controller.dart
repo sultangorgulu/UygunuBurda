@@ -26,7 +26,7 @@ class VerifyEmailController extends GetxController {
         message: 'Please Check your inbox and verify your email',
       );
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     }
   }
 

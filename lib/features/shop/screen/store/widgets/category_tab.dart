@@ -31,7 +31,6 @@ class AppCategoryTab extends StatelessWidget {
             padding: const EdgeInsets.all(AppSizes.defaultSpace),
             child: Column(
               children: [
-                CategoryBrands(category: category),
                 FutureBuilder(
                     future: controller.getCategoryProducts(category.id),
                     builder: (context, snapshot) {

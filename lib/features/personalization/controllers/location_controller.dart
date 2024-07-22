@@ -22,7 +22,7 @@ class LocationController extends GetxController {
       final locations = await locationCloud.getAllLocations();
       allLocations.assignAll(locations);
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
     } finally {
       isLoading.value = false;
     }
@@ -32,7 +32,7 @@ class LocationController extends GetxController {
     try {
       return await locationCloud.getLocationById(locationId: locationId);
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return null;
     }
   }
@@ -41,7 +41,7 @@ class LocationController extends GetxController {
     try {
       return await locationCloud.getLocationsForCity(cityName: cityName);
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }
@@ -50,7 +50,7 @@ class LocationController extends GetxController {
     try {
       return await locationCloud.getLocationsForDistricts(districtsName: districtsName);
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }

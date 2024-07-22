@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uygunuburda/features/authentication/models/model/market_selection_screen.dart';
 import 'package:uygunuburda/features/personalization/controllers/location_controller.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
@@ -283,44 +284,49 @@ class _LocationSearchBarState extends State<LocationSearchBar> {
   }
 
   void _showNeighborhoodPicker(BuildContext context) {
-    if (selectedDistrict == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Lütfen önce bir ilçe seçin."),
+  if (selectedDistrict == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Lütfen önce bir ilçe seçin."),
+      ),
+    );
+    return;
+  }
+
+  final selectedCityData = cities.firstWhere((city) => city['name'] == selectedCity);
+  final selectedDistrictData = selectedCityData['districts'].firstWhere((district) => district['name'] == selectedDistrict);
+  final List<Map<String, dynamic>> neighborhoods = selectedDistrictData['neighborhoods'];
+
+  showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return Container(
+        padding: const EdgeInsets.all(AppSizes.defaultSpace),
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: ListView.builder(
+          itemCount: neighborhoods.length,
+          itemBuilder: (context, index) {
+            final neighborhood = neighborhoods[index];
+            return ListTile(
+              title: Text(neighborhood['name']),
+              onTap: () {
+                setState(() {
+                  selectedNeighborhood = neighborhood['name'];
+                  neighborhoodController.text = neighborhood['name'];
+                });
+                widget.onNeighborhoodSelected(neighborhood['id']);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MarketSelectionScreen(neighborhoodId: neighborhood['id']),
+                  ),
+                );
+              },
+            );
+          },
         ),
       );
-      return;
-    }
-
-    final selectedCityData = cities.firstWhere((city) => city['name'] == selectedCity);
-    final selectedDistrictData = selectedCityData['districts'].firstWhere((district) => district['name'] == selectedDistrict);
-    final List<Map<String, dynamic>> neighborhoods = selectedDistrictData['neighborhoods'];
-
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(AppSizes.defaultSpace),
-          height: MediaQuery.of(context).size.height * 0.5,
-          child: ListView.builder(
-            itemCount: neighborhoods.length,
-            itemBuilder: (context, index) {
-              final neighborhood = neighborhoods[index];
-              return ListTile(
-                title: Text(neighborhood['name']),
-                onTap: () {
-                  setState(() {
-                    selectedNeighborhood = neighborhood['name'];
-                    neighborhoodController.text = neighborhood['name'];
-                  });
-                  widget.onNeighborhoodSelected(neighborhood['id']);
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+    },
+  );
+}
 }

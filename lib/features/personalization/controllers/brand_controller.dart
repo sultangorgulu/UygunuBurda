@@ -30,20 +30,9 @@ class BrandController extends GetxController {
       featuredBrands.assignAll(
           brands.where((brand) => brand.isfeatured ?? false).take(4));
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
     } finally {
       isloading.value = false;
-    }
-  }
-
-  Future<List<BrandModel>> getBrandForCategory(String categoryId) async {
-    try {
-      final brands =
-          await brandcloud.getBrandsForCategory(categoryId: categoryId);
-      return brands;
-    } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
-      return [];
     }
   }
 
@@ -52,8 +41,33 @@ class BrandController extends GetxController {
       final products = await productcloud.getProductsForBrand(brandId: brandId);
       return products;
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }
+
+  Future<List<BrandModel>> getBrandsForNeighborhood(int neighborhoodId) async {
+    try {
+      final brands = await brandcloud.getAllBrands();
+      return brands.where((brand) {
+        return brandNeighborhoods.any((bn) => bn.brandId == brand.id && bn.neighborhoodId == neighborhoodId);
+      }).toList();
+    } catch (e) {
+      
+      return [];
+    }
+  }
+
+  // Brand ve Neighborhood ilişkilerini tutan bir liste.
+  List<BrandNeighborhood> brandNeighborhoods = [
+    BrandNeighborhood(brandId: 1, neighborhoodId: 1),
+    // Diğer ilişkiler...
+  ];
+}
+
+class BrandNeighborhood {
+  final int brandId;
+  final int neighborhoodId;
+
+  BrandNeighborhood({required this.brandId, required this.neighborhoodId});
 }

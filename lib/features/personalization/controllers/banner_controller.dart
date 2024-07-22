@@ -27,7 +27,7 @@ class BannnerController extends GetxController {
       final banners = await bannercloud.fetchAllBanners();
       allBanners.assignAll(banners);
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     } finally {
       isloading.value = false;
     }

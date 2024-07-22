@@ -56,7 +56,7 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       AppFullScreenLoader.stopLoading();
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     }
   }
 
@@ -81,7 +81,7 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       AppFullScreenLoader.stopLoading();
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     }
   }
 }

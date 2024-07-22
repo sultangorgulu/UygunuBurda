@@ -26,7 +26,7 @@ class BannerCloud extends GetxController {
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 

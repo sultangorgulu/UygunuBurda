@@ -23,7 +23,7 @@ class LocationCloud extends GetxController {
     } on AppPlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 
@@ -41,7 +41,7 @@ class LocationCloud extends GetxController {
     } on AppPlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 
@@ -61,7 +61,7 @@ class LocationCloud extends GetxController {
     } on AppPlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 
@@ -81,7 +81,7 @@ class LocationCloud extends GetxController {
     } on AppPlatformException catch (e) {
       throw AppPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong, Please try again';
+      throw '';
     }
   }
 }

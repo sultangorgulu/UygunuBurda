@@ -14,26 +14,28 @@ class BrandModel {
     this.isfeatured,
   });
 
+  
+
   static BrandModel empty() => BrandModel(id: '', name: '', image: '');
 
   Map<String, dynamic> toJson() {
     return {
       'Id': id,
       'Name': name,
-      'Image': image,
+      'image': image,
       'IsFeatured': isfeatured,
     };
   }
 
   BrandModel.fromJson(Map<String, dynamic> snapshot)
       : name = snapshot['Name'] ?? '',
-        image = snapshot['Image'] ?? '',
+        image = snapshot['image'] ?? '',
         isfeatured = snapshot['IsFeatured'] ?? false,
         id = snapshot['Id'] ?? '';
 
   BrandModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
       : name = snapshot.data()!['Name'] ?? '',
-        image = snapshot.data()!['Image'] ?? '',
+        image = snapshot.data()!['image'] ?? '',
         id = snapshot.id,
         isfeatured = snapshot['IsFeatured'] ?? false;
          

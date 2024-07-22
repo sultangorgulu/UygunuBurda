@@ -34,11 +34,11 @@ class CategoryController extends GetxController {
             .where(
               (category) => category.isFeatured && category.parentId.isEmpty,
             )
-            .take(17)
+            .take(18)
             .toList(),
       );
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     } finally {
       isloading.value = false;
     }
@@ -50,17 +50,18 @@ class CategoryController extends GetxController {
           await productcloud.getProductsForCategory(categoryId: categoryId);
       return products;
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }
+
 
   Future<List<CategoryModel>> getSubCategories(String categoryId) async {
     try {
       final subcategories = await categorycloud.getSubCategories(categoryId);
       return subcategories;
     } catch (e) {
-      AppLoaders.errorSnackbar(title: 'Oh Snap!', message: e.toString());
+      
       return [];
     }
   }

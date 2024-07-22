@@ -11,7 +11,7 @@ import 'package:uygunuburda/util/helpers/helper_functions.dart';
 class AppHomeCategories extends StatelessWidget {
   const AppHomeCategories({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     final categorycontroller = Get.put(CategoryController());
     return Obx(() {

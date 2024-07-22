@@ -67,7 +67,7 @@ class UpdateNameController extends GetxController {
       Get.off(() => const NavigationMenu());
     } catch (e) {
       AppFullScreenLoader.stopLoading();
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     }
   }
 
@@ -105,7 +105,7 @@ class UpdateNameController extends GetxController {
       Get.off(() => const NavigationMenu());
     } catch (e) {
       AppFullScreenLoader.stopLoading();
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     }
   }
 }

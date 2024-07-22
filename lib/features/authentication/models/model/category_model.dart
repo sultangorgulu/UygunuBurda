@@ -28,6 +28,7 @@ class CategoryModel {
       'Image': image,
       'ParentId': parentId,
       'IsFeatured': isFeatured,
+      'CategoryId': id,
     };
   }
 
@@ -36,5 +37,5 @@ class CategoryModel {
         image = snapshot.data()!['Image'] ?? '',
         parentId = snapshot.data()!['ParentId'] ?? '',
         isFeatured = snapshot.data()!['IsFeatured'] ?? false,
-        id = snapshot.id;
+        id = snapshot.data()!['CategoryId'] ?? '';
 }

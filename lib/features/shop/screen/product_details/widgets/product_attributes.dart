@@ -35,7 +35,7 @@ class AppProductAttributes extends StatelessWidget {
                   const SizedBox(width: AppSizes.spaceBtwItems),
 
                   Text(
-                    '\$25',
+                    '\₺25',
                     style: Theme.of(context).textTheme.titleSmall!.apply(decoration: TextDecoration.lineThrough),
                   ),
                   const SizedBox(width: AppSizes.spaceBtwItems),

@@ -131,7 +131,7 @@ class UserController extends GetxController {
       AppFullScreenLoader.stopLoading();
 
       AppLoaders.warningSnackbar(
-        title: 'Oh snap!',
+        title: '!',
         message: e.toString(),
       );
     }
@@ -158,7 +158,7 @@ class UserController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       AppFullScreenLoader.stopLoading();
-      AppLoaders.errorSnackbar(title: 'Oh snap!', message: e.toString());
+      
     }
   }
 
@@ -188,7 +188,7 @@ class UserController extends GetxController {
       }
     } catch (e) {
       AppLoaders.errorSnackbar(
-        title: 'Oh snap!',
+        title: '!',
         message: 'Something went wrong $e',
       );
     } finally {

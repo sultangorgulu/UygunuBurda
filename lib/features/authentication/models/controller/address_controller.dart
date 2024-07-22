@@ -20,7 +20,8 @@ class AddressController extends GetxController {
   Rx<AddressModel> selectedAddress = AddressModel.empty().obs;
   final name = TextEditingController();
   final phoneNumber = TextEditingController();
-  final neighbourhood = TextEditingController();
+  final city = TextEditingController();
+  final neighbourhood= TextEditingController();
   final country = TextEditingController();
   GlobalKey<FormState> addressFormkey = GlobalKey<FormState>();
   RxBool refreshData = true.obs;
@@ -86,9 +87,10 @@ class AddressController extends GetxController {
         id: '',
         name: name.text.trim(),
         phoneNumber: phoneNumber.text.trim(),
-        neighbourhood: neighbourhood.text.trim(),
+        city: city.text.trim(),
         country: country.text.trim(),
-        selectedAddress: true, city: '',
+        selectedAddress: true, 
+        neighbourhood: neighbourhood.text.trim(),
       );
 
       final id = await addressesCloud.addAddress(address);
@@ -116,8 +118,8 @@ class AddressController extends GetxController {
   void resetFormFields() {
     name.clear();
     country.clear();
+    city.clear();
     phoneNumber.clear();
-    neighbourhood.clear();
     addressFormkey.currentState?.reset();
   }
 

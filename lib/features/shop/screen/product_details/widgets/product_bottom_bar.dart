@@ -30,11 +30,11 @@ class ProductBottomBar extends StatelessWidget {
           topRight: Radius.circular(AppSizes.cardRadiusLg),
         ),
       ),
-      child: Obx(
-        () => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        ],
       ),
-      )
     );
   }
 }

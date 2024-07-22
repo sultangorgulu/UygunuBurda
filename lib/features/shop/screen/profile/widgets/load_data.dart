@@ -22,7 +22,6 @@ class LoadDataScreen extends StatelessWidget {
     final bannerCloud = Get.find<BannerCloud>();
     final productCloud = Get.put(ProductsCloud());
     final brandCloud = Get.put(BrandCloud());
-    final brandCategoryCloud = Get.put(BrandCategoryCloud());
     final productCategoryCloud = Get.put(ProductCategoryCloud());
 
     return Scaffold(

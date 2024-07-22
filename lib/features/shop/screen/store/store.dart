@@ -59,7 +59,7 @@ class StoreScreen extends StatelessWidget {
                         AppSectionTitle(
                           title: 'Featured Brands',
                           showactionbutton: true,
-                          onPressed: () => Get.to(() => const BrandsScreen(neighborhood: '',)),
+                          onPressed: () => Get.to(() => const BrandsScreen()),
                         ),
                         const SizedBox(height: AppSizes.spaceBtwItems / 2),
                         Obx(() {
