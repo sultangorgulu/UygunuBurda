@@ -9,7 +9,7 @@ class FeaturedBrands extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Featured Brands'),
+        title: const Text('Featured Brands'),
       ),
       body: ListView.builder(
         itemCount: markets.length,

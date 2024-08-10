@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class AllProductsController extends GetxController {
   static AllProductsController get instance => Get.find();

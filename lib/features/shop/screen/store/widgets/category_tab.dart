@@ -5,7 +5,6 @@ import 'package:uygunuburda/features/authentication/models/model/category_model.
 import 'package:uygunuburda/features/personalization/controllers/category_controller.dart';
 import 'package:uygunuburda/features/shop/screen/all_products/all_products.dart';
 import 'package:uygunuburda/features/shop/screen/home/widgets/product_item.dart';
-import 'package:uygunuburda/features/shop/screen/store/widgets/category_brand.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
 import 'package:uygunuburda/util/helpers/cloud_helper_functions.dart';
 import 'package:uygunuburda/util/shared/gridview.dart';

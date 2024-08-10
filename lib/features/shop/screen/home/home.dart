@@ -33,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                 AppPrimaryHeaderContainer(
                   child: Column(
                     children: [
-                      HomeAppBar(),
-                      SizedBox(height: AppSizes.spaceBtwSections),
+                      const HomeAppBar(),
+                      const SizedBox(height: AppSizes.spaceBtwSections),
                       AppSearchBar(
                         showbackground: true,
                         showborder: true,
@@ -65,12 +65,12 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: AppSizes.spaceBtwItems / 0.3),
+                      const SizedBox(height: AppSizes.spaceBtwItems / 0.3),
                     ],
                   ),
                 ),
-                AppPromoSlider(),
-                SizedBox(height: AppSizes.spaceBtwSections),
+                const AppPromoSlider(),
+                const SizedBox(height: AppSizes.spaceBtwSections),
                 Padding(
                   padding: const EdgeInsets.only(left: AppSizes.defaultSpace),
                   child: AppSectionTitle(

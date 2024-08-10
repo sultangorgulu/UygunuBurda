@@ -6,7 +6,6 @@ import 'package:uygunuburda/features/authentication/models/controller/user_contr
 import 'package:uygunuburda/util/constants/image_strings.dart';
 import 'package:uygunuburda/util/helpers/network_manager.dart';
 import 'package:uygunuburda/util/loaders/fullscreen_loader.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();

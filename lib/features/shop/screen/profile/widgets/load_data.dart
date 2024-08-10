@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/database/banner_cloud.dart';
-import 'package:uygunuburda/database/brand_category_cloud.dart';
 import 'package:uygunuburda/database/brand_cloud.dart';
 import 'package:uygunuburda/database/category_cloud.dart';
 import 'package:uygunuburda/database/products_category_cloud.dart';

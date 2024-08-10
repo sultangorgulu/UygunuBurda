@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
 import 'package:uygunuburda/util/constants/colors.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';
@@ -30,7 +28,7 @@ class ProductBottomBar extends StatelessWidget {
           topRight: Radius.circular(AppSizes.cardRadiusLg),
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
         ],

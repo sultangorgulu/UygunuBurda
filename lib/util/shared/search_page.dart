@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:uygunuburda/common/widgets/products/sortable/sortable_products.dart';
 import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
-import 'package:uygunuburda/util/constants/sizes.dart';
 
 class SearchPage extends StatefulWidget {
   final String searchQuery;
@@ -53,16 +51,16 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         title: Text('${widget.searchQuery} için arama sonuçları'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _products.isEmpty
-              ? Center(child: Text('No products found'))
+              ? const Center(child: Text('No products found'))
               : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SortableProducts(

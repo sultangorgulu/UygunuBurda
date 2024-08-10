@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uygunuburda/database/banner_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/banner_model.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class BannnerController extends GetxController {
   static BannnerController get instance => Get.find();
@@ -26,8 +25,6 @@ class BannnerController extends GetxController {
       final bannercloud = Get.put(BannerCloud());
       final banners = await bannercloud.fetchAllBanners();
       allBanners.assignAll(banners);
-    } catch (e) {
-      
     } finally {
       isloading.value = false;
     }

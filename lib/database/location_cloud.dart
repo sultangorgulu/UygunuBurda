@@ -4,7 +4,6 @@ import 'package:uygunuburda/features/authentication/models/model/location_model.
 import 'package:uygunuburda/util/exceptions/firebase_exceptions.dart';
 import 'package:uygunuburda/util/exceptions/format_exceptions.dart';
 import 'package:uygunuburda/util/exceptions/platform_exceptions.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class LocationCloud extends GetxController {
   static LocationCloud get instance => Get.find();

@@ -3,7 +3,6 @@ import 'package:uygunuburda/database/brand_cloud.dart';
 import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/brand_model.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class BrandController extends GetxController {
   static BrandController get instance => Get.find();
@@ -29,8 +28,6 @@ class BrandController extends GetxController {
 
       featuredBrands.assignAll(
           brands.where((brand) => brand.isfeatured ?? false).take(4));
-    } catch (e) {
-      
     } finally {
       isloading.value = false;
     }

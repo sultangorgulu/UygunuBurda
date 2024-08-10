@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:uygunuburda/database/location_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/location_model.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class LocationController extends GetxController {
   static LocationController get instance => Get.find();

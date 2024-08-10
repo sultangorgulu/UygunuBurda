@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:uygunuburda/features/authentication/models/model/brand_model.dart';
 import 'package:uygunuburda/features/authentication/models/model/market_container.dart';
 import 'package:uygunuburda/features/shop/screen/brand/brand_products.dart';
-import 'package:uygunuburda/util/constants/sizes.dart'; // Ensure this path is correct
 import 'package:uygunuburda/util/shared/gridview.dart';
 
 class MarketSelectionScreen extends StatelessWidget {
@@ -81,7 +80,7 @@ class MarketSelectionScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Marketler'),
+        title: const Text('Marketler'),
       ),
       body: AppGridView(
         itemcount: filteredMarkets.length,

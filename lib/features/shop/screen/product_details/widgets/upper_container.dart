@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:uygunuburda/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:uygunuburda/common/widgets/images/rounded_image.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
 import 'package:uygunuburda/features/personalization/controllers/image_controller.dart';
 import 'package:uygunuburda/features/shop/screen/home/widgets/favorite_icon.dart';

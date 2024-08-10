@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/backend/firebase_services.dart';
 import 'package:uygunuburda/features/personalization/controllers/brand_controller.dart';
 import 'package:uygunuburda/features/shop/screen/brand/brand_products.dart';
 import 'package:uygunuburda/util/constants/sizes.dart';

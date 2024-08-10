@@ -24,11 +24,7 @@ class SignUpController extends GetxController {
 
     Future<void> signup() async {
     try {
-      AppFullScreenLoader.openLoadingDialog(
-        'We are processing your information',
-        AppImages.dockeranimation,
-      );
-
+    
       final isconnected = await NetworkManager.instance.isConnected();
       if (!isconnected) {
         return;

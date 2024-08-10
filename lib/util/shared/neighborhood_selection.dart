@@ -13,7 +13,7 @@ class NeighborhoodSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Neighborhood'),
+        title: const Text('Select Neighborhood'),
       ),
       body: ListView.builder(
         itemCount: neighborhoods.length,

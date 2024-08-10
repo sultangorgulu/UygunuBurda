@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:uygunuburda/backend/firebase_storage_services.dart';
 import 'package:uygunuburda/features/authentication/models/model/brand_model.dart';
 import 'package:uygunuburda/util/exceptions/firebase_exceptions.dart';
 import 'package:uygunuburda/util/exceptions/format_exceptions.dart';
 import 'package:uygunuburda/util/exceptions/platform_exceptions.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class BrandCloud extends GetxController {
   static BrandCloud get instance => Get.find();

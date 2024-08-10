@@ -6,7 +6,6 @@ import 'package:uygunuburda/features/authentication/screen/onboarding/widgets/on
 import 'package:uygunuburda/features/authentication/screen/onboarding/widgets/onboarding_page.dart';
 import 'package:uygunuburda/features/authentication/screen/onboarding/widgets/onboarding_skip.dart';
 import 'package:uygunuburda/util/constants/image_strings.dart';
-import 'package:uygunuburda/util/constants/text_strings.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);

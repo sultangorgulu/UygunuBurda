@@ -3,7 +3,6 @@ import 'package:uygunuburda/database/category_cloud.dart';
 import 'package:uygunuburda/database/products_cloud.dart';
 import 'package:uygunuburda/features/authentication/models/model/category_model.dart';
 import 'package:uygunuburda/features/authentication/models/model/product_models.dart';
-import 'package:uygunuburda/util/loaders/loaders.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();
